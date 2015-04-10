@@ -1,0 +1,25 @@
+<div class = 'central_field' style = 'width: 700px;'>
+	<table>
+	<%= form_tag('/old_messages/assign_users_to_old_msgs') do |f| %>
+		<%= submit_tag 'Сохранить' %>
+		<% i = -1 %>
+		<% @names.each do |name| %>
+		<% i += 1 %>
+			<tr>
+				<td style = 'width: 350px;' align = 'right'>
+					<%= name %>
+					<input type = 'hidden' name = 'names[<%= i.to_s %>[name]]'  value = '<%= name %>'/>
+				</td>
+				<td style = 'width: 350px;' align = 'left'>
+					<select name = 'names[<%= i.to_s %>[id]]'>
+						<option value = '0'>Существующие пользователи</option>
+						<% @users.each do |user| %>
+							<option value = '<%= user.id.to_s %>'><%= user.name %></option>
+						<% end %>
+					</select>
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
+	</table>
+</div>

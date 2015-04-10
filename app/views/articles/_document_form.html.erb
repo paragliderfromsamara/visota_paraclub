@@ -1,0 +1,23 @@
+<% article_errors %>
+<%= form_for(@article) do |f| %>
+	<%= f.hidden_field :article_type_id, :value => @type[:value] %>
+ 	<div class = 'field' <%= @attachment_files_f_color.html_safe %>>
+		<%= f.label :attachment_files, 'Документ: ' %> <br />
+		<%= @attachment_files_error.html_safe %>
+		<%= f.file_field :attachment_files, :multiple => true %>
+	</div>
+  <div class="field" <%= @name_f_color.html_safe %>>
+    <%= f.label :name, 'Название' %><br />
+	<%= @name_error.html_safe %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field" <%= @content_f_color.html_safe %> >
+    <%= f.label :content, 'Краткое описание' %><br />
+	<%= @content_error.html_safe %>
+    <%= f.text_area :content, :rows => '4', :cols => '70' %>
+  </div>
+   
+  <div class="actions">
+    <%= f.submit 'Сохранить документы' %>
+  </div>
+<% end %>

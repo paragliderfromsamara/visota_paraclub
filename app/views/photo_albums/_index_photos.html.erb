@@ -1,0 +1,7 @@
+<h2><%= @category_name %></h2>
+<hr />
+<div class = 'central_field' style = 'width: 630px; margin-top: 15px;'>
+	<% @photo_albums.each do |album| %>
+		<%= album_index_block(album) %>
+	<% end %>
+</div>

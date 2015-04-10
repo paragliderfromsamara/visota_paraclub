@@ -1,0 +1,16 @@
+<p class = 'string'>Чтобы зайти на сайт небходимо ввести ник и пароль созданной Вами учётной записи.</p>
+<p class = 'notice'><%= @my_notice %></p>
+<%= form_for(:session, :url => sessions_path(:redirect_to => 'index')) do |f|  %>
+	<div class = 'field'>
+		<%= f.label :name, 'Ник' %> <br />
+		<%= f.text_field :name, :size => 33, :class => 't_field'  %>
+	</div>
+	<div class = 'field'>
+	
+		<%= f.label :password, 'Пароль' %><br />
+		<%= f.password_field :password, :size => 33, :class => 't_field'  %><br /> 	<%= link_to 'Забыли пароль?', '/remember_password', :class => 'b_link' %>
+	</div>
+	<div class = 'field'>
+		<%= f.submit "Войти", :class => 'butt' %>
+	</div>
+<% end %>

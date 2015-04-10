@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @step.user_id %>
+</p>
+
+<p>
+  <b>Part:</b>
+  <%= @step.part_id %>
+</p>
+
+<p>
+  <b>Page:</b>
+  <%= @step.page_id %>
+</p>
+
+<p>
+  <b>Entity:</b>
+  <%= @step.entity_id %>
+</p>
+
+<p>
+  <b>Ip addr:</b>
+  <%= @step.ip_addr %>
+</p>
+
+<p>
+  <b>Host name:</b>
+  <%= @step.host_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_step_path(@step) %> |
+<%= link_to 'Back', steps_path %>

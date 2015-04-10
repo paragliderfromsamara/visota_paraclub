@@ -1,0 +1,51 @@
+<% video_errors %>
+<a name = 'new'></a>
+<div class = 'central_field' style = 'width: 97%;'>
+	<%= form_for(@video) do |f| %>
+	  <table style = 'width: 100%;'>
+	  	<tr>
+		  <td align = 'right' valign = 'middle' >
+			<%= f.label :category_id, 'Категория' %>
+		  </td>
+		  <td align = 'left' valign = 'middle'>
+			<%= my_collection_select(@video.categories, "category_id", 'video', {}, '') %>
+		  </td>
+		</tr>
+		<tr>
+		  <td align = 'right' valign = 'middle' >
+			<%= f.label :name, 'Название' %>
+		  </td>
+		  <td align = 'left' valign = 'middle' <%= @name_f_color.html_safe %>>
+			<%= @name_error.html_safe %>
+			<%= f.text_field :name, :size => '60' %>
+		  </td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'middle' >
+				<%= f.label :link, 'Ссылка' %>
+			</td>
+			<td align = 'left' valign = 'top' <%= @link_f_color.html_safe %>>
+				<%= @link_error.html_safe %>
+				<%= f.text_area :link, :rows => '3', :cols => '60' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'top' >
+				<%= f.label :description, 'Описание' %>
+			</td>
+			<td align = 'left' valign = 'middle' <%= @description_f_color.html_safe %>>
+				<%= @description_error.html_safe %>
+				<%= f.text_area :description, :rows => '13', :cols => '60' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'left' valign = 'top'>
+				<%= f.submit 'Сохранить' %>
+			</td>
+			<td>
+			</td>
+		</tr>
+	</table>
+	<% end %>
+</div>
+<hr />

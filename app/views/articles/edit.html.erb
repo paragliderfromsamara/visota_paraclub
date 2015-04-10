@@ -1,0 +1,21 @@
+
+<% case @type[:value] %>
+	<% when 1 %>
+		<%= render 'accident_form' %>
+	<% when 2 %>
+		<%= render 'document_form' %>
+	<% when 3 %>
+		<% @albums = PhotoAlbum.find_all_by_article_id_and_status_id(([nil, @formArticle.id]), 1) %>
+		<% @videos = Video.find_all_by_article_id([nil, @formArticle.id]) %>
+		<%= render 'report_form' %>
+	<% when 4 %>
+		<% @albums = PhotoAlbum.find_all_by_article_id([nil, @formArticle.id]) %>
+		<% @videos = Video.find_all_by_article_id([nil, @formArticle.id]) %>
+		<%= render 'report_form' %>
+	<% when 5 %>
+		<% @albums = PhotoAlbum.find_all_by_article_id([nil, @formArticle.id]) %>
+		<% @videos = Video.find_all_by_article_id([nil, @formArticle.id]) %>
+		<%= render 'report_form' %>
+	<% else %>
+		<%= 'none' %>
+<% end %>

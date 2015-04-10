@@ -1,0 +1,19 @@
+<div class = 'central_field' id = 'b_wrapper'>
+<div class = 'central_field' id = 'm_1000'>
+	<%= users_paths_buttons.html_safe %>
+	<%= will_paginate @users %>
+</div>
+
+	<% if @users != [] %>
+		<% @users.each do |user| %>
+			<%= user_index_list(user) %>
+		<% end %>
+	<% else %>
+		<p class = 'string'>Нет ни одного пользователя в данной категории</p>
+	<% end %>
+</div>
+<div class = 'central_field' id = 'm_1000'>
+	<div class = 'will_paginate'>
+		<%= will_paginate @users %>
+	</div>
+</div>

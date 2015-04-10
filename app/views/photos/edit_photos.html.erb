@@ -1,0 +1,40 @@
+
+<div class = 'c_box'>
+		<br />
+		<div class = 'central_field' style = 'width: 1000px;'>
+		<%= form_for(:photo_editions, :multipart => true, :url => '/photos/update_photos', :html => {:method => :post}) do |f| %>
+			<%= f.hidden_field :link_to, :value => @link_to %>
+			<% if params[:submitBut] != 'false' %>
+				<div style = "height: 25px; width: 100%; position: relative; margin-left: auto; margin-right: auto;">
+							<%= f.submit 'Сохранить изменения', :id => 'submitButPhotos'%>
+				</div>
+			<% end %>
+			<div id = 'update_photos_form' >
+			<table id = "uPhts">
+			<%= f.fields_for(:photos, :html=> {:remote => 'true'}) do |a| %>
+				<% @photos.each do |photo| %>
+					<% if photo.status_id != 3 %>
+					<%= a.fields_for(:"#{'photo_' + photo.id.to_s}") do |b| %>
+						<tbody class = 'tImage' id = 'img_<%= photo.id.to_s %>'>
+								<tr>
+									<td  align = "center" valign = "top">
+										<%= b.hidden_field :id, :value => photo.id %>
+										<%= image_tag(photo.link.thumb, :class => "album_thumb_photo")%>
+									</td>
+									<td align = "left" valign = "top">
+										<%= b.text_area :description, :rows => '3', :cols => '35', :defaultRows => 3, :value => photo.description, :onkeyup=>"changingTextarea(this)"  %><br />
+										<% if userCanDeletePhoto?(photo) %><a onclick="deletePhotoInTable(this)" photo_id="<%= photo.id.to_s %>" class="b_link pointer">Удалить</a><% end %> <% if params[:hashToCont] == 'true' and @entity != 'photo_album' %><a onclick="addHashCodeToTextArea(this)" class="b_link pointer addHashCode" hashCode="#Photo<%= photo.id.to_s %>"  title = "Нажмите, чтобы встроить фото в текст...">Встроить в текст</a><% end %>
+									</td>
+								</tr>
+						</tbody>				
+					<% end %>	
+					<% end %>
+				<% end %>
+			<% end %>
+			</table>
+			</div>
+		<% end %>
+		</div>
+</div>
+<br />
+<br />

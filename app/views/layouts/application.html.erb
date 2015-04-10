@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= my_title %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <% define_action %>
+  <script type = 'text/javascript'>$(document).ready(function(){my_functions(); wheatherPanel(); <%= js_functions %> bottomControl();});</script>
+</head>
+<body>
+	<!-- <div class = 'right_menu'>
+		<div id = 'wh_cont' style = 'width: 580px;'>
+			<div style = 'display: inline-block;'>
+			<a class = 'b_link' target = '_blank' href = 'http://rp5.ru/7259/ru'>Самара</a><br />
+			<EMBED src='http://rp5.ru/informer/100x100/1/17.swf' loop=false menu=false quality=high scale=noscale wmode=transparent bgcolor=#CCCCCC flashvars='id=7259&lang=ru&um=00000' WIDTH='100' HEIGHT='100' NAME='loader' ALIGN='' TYPE='application/x-shockwave-flash' PLUGINSPAGE= 'http://www.macromedia.com/go/getflashplayer'></EMBED>
+			</div>
+			<div style = 'display: inline-block;'>
+			<a class = 'b_link' target = '_blank'  href = 'http://rp5.ru/123798/ru'>Б. Раковка</a><br />
+			<EMBED src='http://rp5.ru/informer/100x100/1/17.swf' loop=false menu=false quality=high scale=noscale wmode=transparent bgcolor=#CCCCCC flashvars='id=123798&lang=ru&um=00000' WIDTH='100' HEIGHT='100' NAME='loader' ALIGN='' TYPE='application/x-shockwave-flash' PLUGINSPAGE= 'http://www.macromedia.com/go/getflashplayer'></EMBED>
+			</div>
+			<div style = 'display: inline-block;'>
+				<a href='http://6.pogoda.by/28807' title='Прогноз атмосферного давления,скорости и направления ветра по данным UKMET. Самара' target='_blank'>
+				<img src='http://pogoda.by/mg/366/egrr_W28807.gif' width='366' height='100' border='1' alt='График элементов погоды P, Ws, Wa г. Самара прогноз на 126 ч.'></a>
+			</div>
+		</div>
+		<div id = 'cont'>
+			<div style = 'display: none;' id = 'h_wr'>
+			</div>
+		</div>
+		<div id = 'but_area'>
+			<div id = 'w_but'>
+			</div>
+		</div>
+	</div> -->
+	<div class='quickScroll' style = 'display: none;'>
+		<div class = 'arrow' id = 'aUp' style = 'display: none;'></div>
+		<div class = 'arrow' id = 'aDwn' style = 'display: none;'></div>
+	</div>
+	<div id = 'wrapper'>
+		<div id = 'top'>
+				<div id = 'logoField' <% if  @topSlider != true %>style = 'border-bottom: 1px solid #e1eaf6;'<% end %>>
+					<div link_to = '/' id = 'mLogo'></div>
+					<% if @topSlider == true %>
+						<%= topSlider.html_safe%>
+					<% end %>
+				</div>
+			<div id = 'menuWrapper'>
+				<div id = 'ses_p'>
+					<%= user_session_menu.html_safe %>
+				</div>
+				<div id = 'mainMenu'>
+					<%= put_link_type.html_safe %>
+				</div>
+			</div>
+		</div>
+		<div id = 'middle'>
+			<%= header_1 %>
+			<%= yield %>
+			<div id = 'whiteSpace' style = 'position: relative; width: 100%;'></div>
+		</div>
+		<div id = 'bottom'>
+			<div id = 'test'></div>
+		</div>
+	</div>		
+</body>
+</html>

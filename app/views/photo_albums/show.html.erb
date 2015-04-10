@@ -1,0 +1,23 @@
+<%= navigation_string.html_safe %>
+<br />
+<div id = 'b_wrapper'>	
+	<% i=1 %>
+	<%= album_index_block(@album, i, 'show') %>
+	<%= newMessageFormInitial('none', '#new_message').html_safe %>
+	<% if @album.comments != [] %>
+		<% @album.comments.each do |c| %>
+			<% i+=1 %>
+			<%= message_theme_box(c, true, i).html_safe %>
+		<% end %>
+	<% else %>
+		<br />
+		<br />
+			<p class = 'istring norm'>Нет ни одного комментария к альбому</p>
+		<br />
+		<br />
+	<% end %>
+</div>
+<br />
+<%= navigation_string.html_safe %>
+<br />
+<br />

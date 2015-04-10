@@ -1,0 +1,9 @@
+<% if @comments != [] %>
+	<% i=0 %>
+	<% @comments.each do |message| %>
+		<% i+=1 %>
+		<%= message_theme_box(message, true, i).html_safe %>
+	<% end %>
+<% else %>
+	<p class = 'istring norm medium-opacity'>Нет ни одного комментария...</p>
+<% end %>

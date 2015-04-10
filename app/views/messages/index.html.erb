@@ -1,0 +1,61 @@
+<h1>Listing messages</h1>
+<%= @messages.count.to_s %>
+<table>
+  <tr>
+	<th>Id</th>
+    <th>User</th>
+    <th>Topic</th>
+    <th>Theme</th>
+    <th>Message</th>
+    <th>Photo</th>
+    <th>Video</th>
+    <th>First message</th>
+    <th>Updater</th>
+    <th>Theme</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+	<td valign = 'top'><%= message.content.length %></td>
+    <td valign = 'top'><%= message.user_id %></td>
+    <td valign = 'top'><%= message.topic_id %></td>
+    <td valign = 'top'><%= message.theme_id %></td>
+    <td valign = 'top'><%= message.message_id %></td>
+    <td valign = 'top'><%= message.photo_id %></td>
+    <td valign = 'top'><%= message.video_id %></td>
+    <td valign = 'top'><%= message.first_message_id %></td>
+    <td valign = 'top'><%= message.updater_id %></td>
+    <td valign = 'top'><%= message.theme %></td>
+    <td valign = 'top'><%= message.content %></td>
+    <td><%= link_to 'Show', message %></td>
+    <td><%= link_to 'Edit', edit_message_path(message) %></td>
+    <td><%= link_to 'Destroy', message, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+   <tr>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td valign = 'top'>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr> 
+<% end %>
+</table>
+
+<br />
+<br />
+<br />
+
+<%= link_to 'New Message', new_message_path %>

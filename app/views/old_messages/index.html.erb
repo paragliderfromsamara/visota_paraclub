@@ -1,0 +1,27 @@
+<%= navigation_string.html_safe %>
+<br />
+<div class = 'central_field' id = 'm_1000'>
+<%= will_paginate @themes %>
+</div>
+
+<br/>
+<div class = 'central_field' style = 'width: 90%;'>
+	<h1>Архив сообщений с para.saminfo.ru</h1>
+</div>
+<br />
+<div class = 'central_field' id = 'b_wrapper'>
+	<div id = 'b_wrapper'>
+		<% i=0 %>
+		<% @old_messages.each do |message| %>
+			<%= old_message_box(message, i).html_safe if message.content != '' and message.created_when != nil and message.user_name != '' %>
+			<% i+=1 %>
+		<% end %>
+	</div>
+</div>
+<br />
+<div class = 'central_field' id = 'm_1000'>
+<%= will_paginate @themes %>
+</div>
+<br />
+<%= navigation_string.html_safe %>
+<br />

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title %></title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag "lightbox", :media => "all" %> 
+  <%= stylesheet_link_tag "jquery-ui-1.10.4.custom.min.css", :media => "all" %> 
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "lightbox-2.6.min" %>
+  <%= csrf_meta_tags %>
+  <% define_action %>
+  <script type = 'text/javascript'>
+	$(document).ready(function(){wheather_panel();my_functions();checkMyDropLists();});	
+  </script>
+  <!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+</head>
+<body>
+	<div class = 'central_field' style = 'min-width: 1000px;'>
+		<div class = 'central_field' style = 'width: 100%;'>
+			<div class = 'inline_c1'>
+				<div class = 'mono_cb'>	
+					<% if user_type == 'guest'%>
+						<table style = 'height: 30px;'>
+							<tr>
+								<td align = 'left' valign = 'middle'>
+									<%= link_to 'Войти', '/signin', :class => 'b_link' %> | <%= link_to 'Регистрация', '/signup', :class => 'b_link' %>
+								</td>
+							</tr>
+						</table>
+						
+					<% else %>
+						<table style = 'height: 30px;'>
+							<tr>
+								<td align = 'left' valign = 'middle'>
+									<%= current_user.role_card('Вы вошли как').html_safe %>
+								</td>
+								<td align = 'left' valign = 'middle' style = 'border-left-width:1px;' >
+									<%= link_to 'Профиль', current_user %>
+								</td>
+							</tr>
+						</table>
+					<% end %>
+					<hr/>
+					<%= navigation_string.html_safe if @path_array != nil and @path_array != [] %>
+					<%= yield %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class = 'central_field' style = 'width:100%;background-color:#F0F3FF; height:130px;'>
+		<img src="/files/logo.png" style="z-index:53; position:relative; margin-left: 10px; top:18px" height="100px">
+		<p style="color:#306C97; font-family: Arial; font-size: 10pt; margin-left: 100px; margin-top:-70px"><b>Тел. +7-927-294-30-01<br />E-mail: vysota-samara@mail.ru<br /><br />© СПК "Высота", г.Самара 2000-<%= Time.now.strftime("%Y") %></b></p>
+			<div style = "position: relative; margin-top: -50px; margin-left: 45%;">
+			<!-- Yandex.Metrika informer -->
+			<a href="http://metrika.yandex.ru/stat/?id=19725562&amp;from=informer"
+			target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/19725562/3_1_FFFFFFFF_E6E9FFFF_0_pageviews"
+			style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:19725562,type:0,lang:'ru'});return false}catch(e){}"/></a>
+			<!-- /Yandex.Metrika informer -->
+
+			<!-- Yandex.Metrika counter -->
+			<script type="text/javascript">
+			(function (d, w, c) {
+				(w[c] = w[c] || []).push(function() {
+					try {
+						w.yaCounter19725562 = new Ya.Metrika({id:19725562,
+								clickmap:true,
+								trackLinks:true,
+								accurateTrackBounce:true});
+					} catch(e) { }
+				});
+
+				var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function () { n.parentNode.insertBefore(s, n); };
+				s.type = "text/javascript";
+				s.async = true;
+				s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+				if (w.opera == "[object Opera]") {
+					d.addEventListener("DOMContentLoaded", f, false);
+				} else { f(); }
+			})(document, window, "yandex_metrika_callbacks");
+			</script>
+			<noscript><div><img src="//mc.yandex.ru/watch/19725562" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+			<!-- /Yandex.Metrika counter -->
+		</div>
+	</div>
+</body>
+</html>

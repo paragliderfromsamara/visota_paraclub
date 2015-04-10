@@ -1,0 +1,74 @@
+<% vote_errors %>
+<div class = 'c_box'>
+	<div class = 'central_field' id = 'm_1000wh'>
+		<br />
+		<div class = 'central_field' style = 'width: 100%;'>
+			<h1><%= @title %></h1>
+		</div>
+		<br />
+		<%= form_for(@vote) do |f| %>
+			<%= f.hidden_field :start_date, :value => Time.now %><br />
+			<%= f.label :end_date, 'Дата завершения опроса' %><br />
+			<%= f.date_select :end_date, 
+											 :start_year => Time.now.year, 
+											 :default => (1.days.from_now),
+											 :order => [:day, :month, :year],
+											 :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] 
+											 %><br /><br />
+			<%= f.label :content, 'Вопрос' %><br />
+			<%= f.text_area :content, :rows => '7', :cols => '100' %>
+			<div>
+				<p class = 'istring <%= @content_f_color.html_safe if @content_f_color != nil %>' id = 'cLength'>
+					<span id = 'txtL'></span>
+					<span id = 'txtErr'></span>
+					<span id = 'txtErrSrv'><%= @content_error.html_safe if @content_error != nil%></span>
+				</p>
+			</div>
+			<br />
+			<%= f.fields_for :vote_values do |v| %>
+				<%= v.label :value, 'Варианты' %><br />
+				<table id = 'vote_values_table'>
+					
+						<% if params[:vote] != nil and params[:vote] != []  %>
+							<% i = 0 %>
+							<% params[:vote][:vote_values].each do |val| %>
+								<tbody id = "vote_value_item" class = 'vote_value_items'>
+								<tr>
+									<td>
+										<%= v.text_field i, :class => 'vote_values t_field', :autocomplete => 'off', :value => val[1] %>
+									</td>
+									<td id = 'voteValDelBut'>
+									</td>
+								</tr>
+								</tbody>
+								<% i += 1 %>
+							<% end %>
+						<% else %>
+							<tbody id = "vote_value_item" class = 'vote_value_items'>
+							<tr>
+								<td>
+									<%= v.text_field 0, :class => 'vote_values t_field', :autocomplete => 'off', :value => 'Да'   %>
+								</td>
+								<td id = 'voteValDelBut'>
+								
+								</td>
+							</tr>
+							</tbody>
+							<tbody id = "vote_value_item" class = 'vote_value_items'>
+								<tr>
+									<td>
+										<%= v.text_field 1, :class => 'vote_values t_field', :autocomplete => 'off', :value => 'Нет'  %>
+									</td>
+									<td id = 'voteValDelBut'>
+									</td>
+								</tr>
+							</tbody>
+						<% end %>
+				</table>
+				<%= control_buttons([{:name=> 'Добавить вариант', :id => 'addVoteValue', :access => true, :type => 'add'}]).html_safe %>
+				
+			<% end %>
+			<%= f.submit 'Создать' %>
+		<% end %>
+	</div>
+</div>

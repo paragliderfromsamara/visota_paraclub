@@ -1,0 +1,19 @@
+<div class = 'central_field' id = 'b_Wrapper'>
+		<%= form_for(:split_theme, :url => '/do_merge_themes') do |f| %>
+			<div class = 'field'>
+			<%= f.hidden_field :current_theme, :value => @theme.id %><br />
+			<%= f.label :topic_id, "Раздел:" %><br /> <%= my_collection_select(@collection, "topic_id", "split_theme", @default, "") %> 
+			</div>
+			<div class = 'field'>
+			<%= f.label :new_theme_id, "Целевая тема:" %><br />
+			<%= my_collection_select(@themes_collection, "theme_id", "split_theme", {}, "Выберите тему из списка") %> <br />
+			</div>
+			<%= f.submit "Совместить", :class => 'butt' %>
+		<% end %>
+		<br />
+		<h3>Целевая тема</h3>
+		<div id = 'target_theme'>
+		</div>
+		<h3>Перемещаемая тема</h3>
+		<%= theme_show_block(false).html_safe %>
+</div>

@@ -1,0 +1,108 @@
+<div class = 'central_field' id = 'm_1000'>
+<%= buttons_in_line(visota_life_panel).html_safe %>
+</div>
+<%= "<div class = 'c_box'><div class = 'central_field' style = 'width: 90%; z-index: 15;'>#{admin_index_topic_buttons}</div></div>".html_safe if is_super_admin? %>
+<% @topics.each do |topic| %>
+	<div class = 'c_box'>
+				<div class = 'central_field' style = 'width: 90%; z-index: 15;'>
+					</br>
+						<div class = 'central_field' style = 'width: 100%;'>
+							<%= link_to(topic.name, topic, :class => 'b_link_bold', :style => 'font-size: 14pt;') %>	
+						</div>
+					</br>
+					<% 
+						themes = topic.last_active_themes(is_not_authorized?)
+						if themes != [] 
+					%>
+						<table class = 'v_table' id = 'themes_list_vl'>
+							<tr>
+								<th id = 'first'>Тема</th>
+								<th>Автор крайнего сообщения</th>
+								<th>Дата</th>
+							</tr>
+							<% themes.each do |theme| %>
+								<tbody class = 't_link' link_to = '<%= theme_path(theme)%>'>
+								<tr>
+									<td class = 't_name' id = 'first'>
+										<%= theme.name %>
+									</td>
+									<% 
+										msg = theme.last_message
+										if msg != nil
+									%>
+											<td class = 'usr'>
+												<%= msg.user.name  %>
+											</td>
+											<td class = 'date'>
+												<%= my_time(msg.created_at) %>
+											</td>
+									<% else %>																		
+											<td class = 'usr'>
+												<%= theme.user.name %>
+											</td>
+											<td class = 'date'>
+												<%= my_time(theme.created_at) %>
+											</td>
+									<% end %>	
+									
+								</tr>
+								</tbody>
+							<% end %>
+							
+						</table>
+						<br />
+						<div class = 'central_field' style = 'width: 100%;'>
+							<table style = 'width: 100%;'>
+								<tr>
+									<td align = 'left' valign = 'middle'>
+										<%= control_buttons(index_topic_buttons(topic)).html_safe %>
+									</td>
+									<td style = 'width: 200px;'>
+										<% entities_count = topic.entities_count(is_not_authorized?) %>
+										<p class = 'istring_m norm medium-opacity'>Тем: <%= entities_count[:cThemes].to_s %> Сообщений: <%= entities_count[:cMessages].to_s %></p>
+									</td>
+								</tr>
+							</table>
+							<br />
+						</div>
+					<% else %>
+						<p class = 'istring'>В данном разделе нет ни одной активной темы...</p>
+					<% end %>
+				</div>
+	</div>
+	<br />
+<% end %>
+<div class = 'c_box'>
+	<div class = 'central_field' style = 'width: 90%; height: 150px;'>
+			</br>
+			<div class = 'central_field' style = 'width: 100%;'>
+				<%= link_to('Архив сообщений с para.saminfo.ru', old_messages_path, :class => 'b_link_bold', :style => 'font-size: 14pt;') %>	
+			</div>
+			</br>
+			<div class = 'central_field' style = 'width: 90%;'>
+				<p class = 'istring_m medium-opacity'>Здесь размещены сообщения сохранённые с старого сайта, который располагался по адресу <a class = 'b_link_i' href='http://para.saminfo.ru/'>para.saminfo.ru...</a></p>
+			</div>
+			<br /><br /><br />
+			<div class = 'central_field' style = 'width: 100%;'>
+				<table style = 'width: 100%;'>
+					<tr>
+						<td align = 'left' valign = 'middle'>
+							<%= control_buttons([{:name=> 'Перейти в раздел', :type => 'follow', :link => old_messages_path, :access=>true}]).html_safe %>
+						</td>
+						<td style = 'width: 200px;'>
+							<p class = 'istring_m norm medium-opacity'>Сообщений: <%= OldMessage.all.count.to_s %></p>
+						</td>
+					</tr>
+				</table>
+				
+				<br />
+			</div>
+	</div>
+	
+	<br />
+</div>
+<br />
+<br />
+<br />
+
+

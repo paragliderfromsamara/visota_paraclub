@@ -1,0 +1,11 @@
+<% if @themes != [] %>
+	<%= will_paginate @themes %>
+	<%= themes_table.html_safe %>
+	<%= will_paginate @themes %>
+<% else %>
+	<p>Нет ни одной темы соответствующей вашему запросу...</p>
+<% end %>
+
+<br />
+<br />
+<br />

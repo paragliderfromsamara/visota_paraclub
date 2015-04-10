@@ -1,0 +1,28 @@
+<h2>Изменение E-mail адреса</h2>
+<hr />
+<div class = 'b_field'>
+<%= form_for(@user) do |f| %>
+<input type = 'hidden' name = 'tab' value = 'email_upd'>
+<% user_errors %>
+	<table style = 'width: 100%;'>
+	<tr>
+		<td align = 'right' valign = 'middle' style = 'width: 150px; height: 30px;'>
+			<%= f.label "Текущий пароль" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span>
+		</td>
+		<td align = 'left' valign = 'top' <%= @cur_pswrd_f_color.html_safe %> >
+			 <%= @cur_pswrd_error.html_safe %>
+			 <%= f.password_field :current_password %>
+		</td>
+	</tr>
+	<tr>
+		<td align = 'right' valign = 'top' style = 'width: 150px; height: 30px;'>
+			<img src="/files/mail.png" valign = 'middle' > <%= f.label "E-mail" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span>
+		</td>
+		<td align = 'left' valign = 'top' <%= @mail_f_color.html_safe %>>
+			<%= @mail_error.html_safe %><%= f.text_field :email %>
+		</td>
+	</tr>
+  </table>
+	  <%= f.submit 'Сохранить' %>
+ <% end %>
+</div>

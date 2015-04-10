@@ -1,0 +1,25 @@
+<div class = 'central_field' id = 'm_1000'>
+<%= albums_paths_buttons.html_safe %>
+<%= will_paginate @albums %>
+</div>
+<div id = 'b_wrapper'>	
+		<% if !is_not_authorized? %>
+				<div class = 'c_box'><div class = 'central_field' id = 'm_1000wh'><%= control_buttons(index_albums_buttons).html_safe %></div></div>	
+		<% end %>
+		<% if @albums != [] %>
+					<% i=0 %>
+					<% @albums.each do |album| %>
+						<%= album_index_block(album, i, 'index') %>
+						<% i+=1 %>
+					<% end %>
+		<% else %>
+			<p class = 'istring norm medium-opacity'>Нет ни одного фотоальбома в данной категории...</p>
+		<% end %>
+</div>
+<br /><br />
+<div class = 'central_field' id = 'm_1000'>
+	<%= albums_paths_buttons.html_safe %>
+	<%= will_paginate @albums %>
+</div>
+<br />
+

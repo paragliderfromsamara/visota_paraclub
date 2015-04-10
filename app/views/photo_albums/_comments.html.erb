@@ -1,0 +1,11 @@
+<% if @album.comments != [] %>
+	<% i = 0 %>
+	<% @album.comments.each do |msg| %>
+		<% i += 1 %>
+		<%= photo_comment_block(msg, 'block').html_safe if i <= @displayed_comments %>
+		<%= photo_comment_block(msg, 'none').html_safe if i > @displayed_comments %>
+	<% end %>
+	<%= ("<div class = 'tgl_line' align = 'center' id = 'show_cmts' style = 'background-color: #006E9A;' cmts_count = '#{@displayed_comments.to_s}'>Показать все</div>").html_safe if @displayed_comments < @album.comments.count %>
+<% else %>
+	<div class = 'central_field' style = 'width: 97%;'><p class = 'istring'>Нет ни одного комментария</p></div>
+<% end %>

@@ -1,0 +1,17 @@
+<%= navigation_string.html_safe %>
+<% my_message_errors %>
+<br /><br />
+<div class = 'central_field' id = 'b_wrapper'>
+	<% if @theme != nil %>
+		<%= theme_show_block(false).html_safe %>
+	<% end %>
+	<% if @message_to != nil %>
+			<%= message_theme_box(@message_to, false, 1).html_safe %>
+	<% end %>
+	<div id = 'newMsgForm'>
+		<%= new_msg_frm %>
+	</div> 
+</div>
+<br />
+<%= navigation_string.html_safe %>
+<br /><br />

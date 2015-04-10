@@ -1,0 +1,35 @@
+		<%= notice %>
+		<%= form_for(:replace_message, :url => '/do_replace_message') do |f| %>
+			<%= f.hidden_field :current_message, :value => @message.id %>
+			<div class = 'field'>
+				<%= f.label :topic_id, "Раздел:" %><br /> 
+				<%= my_collection_select(@collection, "topic_id", "split_theme", @default, "") %> 
+			</div>
+			<div class = 'field'>
+				<%= f.label :new_theme_id, "Целевая тема:" %><br /> 
+				<%= my_collection_select(@themes_collection, "theme_id", "split_theme", {}, "Выберите тему из списка") %> <br />
+			</div>			
+			<div class = 'field'>
+				<%= f.label :make_new_as_theme, "Вынести в отдельную тему" %><%= f.check_box :make_new_as_theme, :class => 'check_box' %><br />
+			</div>
+			<div class = 'field'>
+				<%= f.label :theme_name, 'Название новой темы' %><br />
+				<%= f.text_field :new_theme_name, :size => 70, :class => 't_field' %><br />
+			</div>
+			<br />
+			<%= f.submit "Произвести изменение", :class => 'butt' %>
+		<% end %>
+		<div class = 'central_field' id = 'b_wrapper'>
+		<h3>Целевая тема</h3>
+		<div id = 'target_theme'>
+		</div>
+		<h3>Переносимое сообщение</h3>	
+		<% i=0 %>
+		<%= message_theme_box(@message, false, i).html_safe %>
+			<% if @message.get_tread != [] %>
+				<% @message.get_tread.each do |msg| %>
+					<% i+=1 %>
+					<%= message_theme_box(msg, false, i).html_safe %>
+				<% end %>
+			<% end %>
+		</div>

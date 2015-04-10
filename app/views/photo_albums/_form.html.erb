@@ -1,0 +1,37 @@
+<% initPhotoAlbumForm %>	
+	<div class = 'c_box odd'>
+			<div class = 'central_field' style = 'width: 700px;' id = 'albumForm'>
+				<br />
+					<h3><%= @title %></h3>
+				<br />
+				<%= form_for(@albumToForm, :multipart => true) do |f| %>
+					<%= f.hidden_field :uploaded_photos, :value => '' %>
+					<% if is_super_admin? %>
+						<% @users = User.find(:all, :order=> 'created_at ASC') %>
+						<%= f.label :user_id, 'Автор' %><br />
+						<%= f.collection_select :user_id, @users, :id, :name, {}, {:class => 'c_select'} %><br /><br />
+					<% end %>
+					<%= f.label :category_id, 'Категория' %><br />
+					<%= my_collection_select(@albumToForm.categories, "category_id", 'photo_album', {}, '') %><br /><br />				
+					<%= f.label :name, 'Название альбома' %>									
+					<%= f.text_field :name, :size => '60', :class=> 't_field', :autocomplete => 'off' %>
+					<div><p class = 'istring <%= @name_f_color if @name_f_color != nil%>' id = 'nLength'><span id = 'txtL'></span> <span class = 'err' id = 'txtMatchesErr'></span><span id = 'txtErr'></span><span id = 'txtErrSrv'><%= @name_error if @name_error != nil %></span></p></div>
+					<div style = 'position: relative; z-index: 1000; width: 100%;' id = 'likebleNames'></div>
+					<br /><br />
+					<div id = 'formPhotos'>
+						<%= f.label :uploaded_photos, 'Фотографии альбома' %>
+						<div class = 'dropzone' id = 'ph_to_frm'>
+						</div>
+						<div id = 'uploadedPhotos'>
+						</div>
+						<div><p class = 'istring <%= @photos_f_color if @photos_f_color != nil %>' id = 'iLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @photos_error.html_safe if @photos_error != nil %></span><span id = 'txtErrSrv'><%= @photos_error if @photos_error != nil %></span></p></div>
+					</div><br/>
+					<%= f.label :description, 'Описание' %><br />
+					<%= f.text_area :description, :cols => 55, :rows => 5, :class=> 't_area', :defaultRows => 5, :onkeyup => 'changingTextarea(this)' %>
+					<div><p class = 'istring <%= @content_f_color if @content_f_color != nil%>' id = 'cLength'><span id = 'txtL'></span> <span id = 'txtErr'></span><span id = 'txtErrSrv'><%= @content_error if @content_error != nil %></span></p></div><br /><br />
+					<%= f.submit @buttName, :class=> 'butt' %>
+				<% end %>
+				<br />
+				<br />
+			</div>
+	</div>

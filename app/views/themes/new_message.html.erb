@@ -1,0 +1,26 @@
+<%= navigation_string.html_safe %>
+
+<div class = 'central_field' id = 'b_wrapper'>
+	<p id="notice"><%= notice %></p>
+		<div class = 'central_field' style = 'width: 97%;'>
+			<%= theme_content.html_safe %>
+			<br />
+			
+			<br />
+		</div>
+<br />
+	<% if @message_to != nil %>
+		<div class = 'central_field' style = 'width: 97%;'>
+			<%= message_theme_box(@message_to, false).html_safe %>
+		</div>  
+	<% end %>
+	<div class = 'central_field' style = 'width: 97%;'>
+			<%= new_message_form_in_theme.html_safe %>
+	</div> 
+</div>
+
+<%= navigation_string.html_safe %>
+
+<br />
+<br />
+<br />

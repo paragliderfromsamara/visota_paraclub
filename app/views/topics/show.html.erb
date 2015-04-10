@@ -1,0 +1,24 @@
+<%= navigation_string.html_safe %>
+<div class = 'central_field' id = 'w_1000'>
+	<%= will_paginate @themes %>
+</div>
+<br/>
+<div class = 'central_field' style = 'width: 90%;'>
+	<h1><%= @topic.name %></h1>
+	<br />
+</div>
+<%= "<div class = 'c_box'><div class = 'central_field' style = 'width: 91%;'>#{control_buttons(show_topic_buttons(@topic))}</div></div>".html_safe if control_buttons(show_topic_buttons(@topic)) != '' %>
+<div class = 'c_box'>
+	<div class = 'central_field' style = 'width: 90%;'>
+	<%= themes_table.html_safe %>
+	</div>
+</div>
+<div class = 'central_field' id = 'w_1000'>
+	<%= will_paginate @themes %>
+</div>
+<br />
+
+<%= navigation_string.html_safe %>
+<br />
+<br />
+<br />

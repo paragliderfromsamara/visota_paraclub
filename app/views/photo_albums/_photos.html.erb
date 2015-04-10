@@ -1,0 +1,10 @@
+<div class = 'central_field' style = 'width: 95%;'>
+<% @album.photos.each do |photo| %>
+	
+	<div class = "photo_thumbs">
+		<div>
+			<%= light_box_photo_block(photo).html_safe %>
+		</div>
+	</div>
+<% end %>
+</div>

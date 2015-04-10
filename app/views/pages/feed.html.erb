@@ -1,0 +1,29 @@
+<div class = 'central_field' id = 'm_1000'>
+	<%= feed_nav_buttons %>
+	<div class = "pagination">
+		<%= feed_pagination if @entity_array.length > @entity_on_page %>
+	</div>		
+</div>
+<br />
+<div class = 'central_field' id = 'b_wrapper'>
+		<% if @entity_array != [] %>
+			<% i = 0 %>
+			<% array_to_view.each do |v| %>
+				<%= build_as_answer_block(v, i).html_safe if current_feed_part[:en_name] == 'answers' %>
+				<%= build_as_theme_block(v, i).html_safe if current_feed_part[:en_name] == 'themes' %>
+				<%= build_as_album_block(v, i).html_safe if current_feed_part[:en_name] == 'albums' %>
+				<%= build_as_video_block(v, i).html_safe if current_feed_part[:en_name] == 'videos' %>
+				<%= build_as_article_block(v, i).html_safe if current_feed_part[:en_name] == 'articles' %>
+				<%= build_as_comments_block(v, i).html_safe if current_feed_part[:en_name] == 'comments' %>
+				<% i += 1 %>
+			<% end %>
+		<% else %>
+			<p class = 'istring norm'>В данной ленте ничего нет</p>
+		<% end %>
+</div>
+<br />
+<div class = 'central_field' id = 'm_1000'>	
+	<div class = "pagination">
+		<%= feed_pagination if @entity_array.length > @entity_on_page %>
+	</div>
+</div>

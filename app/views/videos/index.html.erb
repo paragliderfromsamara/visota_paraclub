@@ -1,0 +1,22 @@
+<div class = 'central_field' id = 'm_1000'>
+<%= videos_paths_buttons.html_safe %>
+<%= will_paginate @videos %>
+</div>
+<div class = 'c_box'>
+	<br />
+		<div class = 'central_field' style = 'width: 1000px; min-height: 300px;'>
+			<% if @videos != [] %>
+				<% @videos.each do |video| %>
+					<%= video_index_block(video).html_safe %>
+				<% end %>
+			<% else %>
+				<p class = 'istring norm'>В данной категории нет ни одного видео</p>
+			<% end %>
+		</div>
+	<br />
+</div>
+<br />
+<div class = 'central_field' id = 'm_1000'>
+<%= videos_paths_buttons.html_safe %>
+<%= will_paginate @videos %>
+</div>

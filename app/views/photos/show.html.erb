@@ -1,0 +1,47 @@
+<div id = 'photoField'>
+	<% if @prev_photo != nil %><div class = 'ph-big-links ph-big-prev' link_to = '<%= @prev_photo %>'></div><% end %>
+	<% if @next_photo != nil %><div class = 'ph-big-links ph-big-next' link_to = '<%= @next_photo %>'></div><% end %>
+	<div align = 'center' class = 'central_field' style = 'width: 100%; '>
+		<%= image_tag @photo.link, :style => 'height: 700px;' %>
+	</div>
+</div>
+<div id = 'photoPagination'>
+	<div class = 'central_field' id = 'paginationLine'>
+		<div class = 'ph-arrows ph-arr-left ph-h'></div><%= photo_pagination.html_safe %><div class = 'ph-arrows ph-arr-right ph-h'></div>
+	</div>
+</div>
+<div id = 'phInfo'>
+	<div id = 'b_wrapper'>
+		
+		<div class = 'c_box'>
+			<div class = 'central_field' style = 'width: 1000px;'>
+				<%= photo_info.html_safe %>
+			</div>
+		</div>
+		<div id = 'b_wrapper'>
+			<div class = 'central_field' style = 'width: 1000px;'>
+				<%= photo_comment_button.html_safe %>
+				<%= newMessageFormInitial('none', '#new_message').html_safe %>
+				<h3>Комментарии к фото</h3>
+				<br />
+				
+				
+				<div class = 'central_field' style = 'width: 980px;'>
+				
+					<% if @photo.comments != [] %>
+						<% i=0 %>
+						<% @photo.comments.each do |message| %>
+							<%= message_theme_box(message, true, i).html_safe %>
+							<% i+=1 %>
+						<% end %>
+					<% else %>
+						<br />
+						<p class = 'istring norm'>Не ни одного комментария...</p>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br />
+<br />

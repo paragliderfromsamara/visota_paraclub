@@ -1,0 +1,34 @@
+
+<%= form_for(@old_message) do |f| %>
+  <% if @old_message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@old_message.errors.count, "error") %> prohibited this old_message from being saved:</h2>
+      <ul>
+      <% @old_message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id, 'Ассоциируемый пользователь' %><br />
+    <%= f.collection_select :user_id, @users, :id, :name, :html => {:prompt => 'Выберите пользователя'} %>
+  </div>
+  <div class="field">
+    <%= f.label :user_name, 'Имя в старой гостевой' %> 
+    <b><%= @old_message.user_name %></b>
+  </div>
+  <div class="field">
+    <%= f.label :created_when, 'Создано:' %> 
+    <b><%= @old_message.created_when.to_s(:ru_datetime) %></b>
+  </div>
+  <div class="field">
+    <%= f.label :content, 'Текст сообщения' %><br />
+    <%= f.text_area :content, :cols => '100', :rows => '20' %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Сохранить' %>
+  </div>
+<% end %>
+

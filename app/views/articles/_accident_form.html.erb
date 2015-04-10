@@ -1,0 +1,16 @@
+<% article_errors %>
+<%= form_for(@article) do |f| %>
+	<%= f.hidden_field :article_type_id, :value => @type[:value] %>
+  <div class="field">
+    <b><%= f.label :accident_date, 'Лётное происшествие от ' %></b>
+    <%= f.datetime_select :accident_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %>
+  </div>
+  <div class="field" <%= @content_f_color.html_safe %> >
+    <b><%= f.label :content, 'Описание лётного происшествия' %></b><br />
+	<%= @content_error.html_safe %>
+    <%= f.text_area :content, :rows => '20', :cols => '120' %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Сохранить' %>
+  </div>
+<% end %>

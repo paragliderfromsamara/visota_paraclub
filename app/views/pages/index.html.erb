@@ -1,0 +1,12 @@
+<% parallaxItems.each do |p| %>
+	<div class = 'pBox' id = '<%= p[:id] %>' style = '<%= p[:style].html_safe %>'>
+		<% if p[:bg_img] == true %>
+			<div class = 'pB-wrapper pB-wr-abs <%= p[:actioClass] %>' pb-speed = '<%= p[:speed] %>' pb-start-position = '<%= p[:startPosition] %>' style = '<%= p[:backgroundStyle] %>");'></div>
+		<% end %>
+		<div class = 'pB-content'>
+			<%= p[:html].html_safe %>
+		</div>
+	</div>
+<% end %>
+
+

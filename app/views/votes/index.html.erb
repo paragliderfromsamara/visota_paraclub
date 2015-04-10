@@ -1,0 +1,103 @@
+<%= navigation_string.html_safe %>
+<br />
+<%= "<div class = 'c_box'><div class = 'central_field' style = 'width: 90%'>#{control_buttons(index_votes_buttons)}</div></div>".html_safe if control_buttons(index_votes_buttons) != ''%>
+<div class = 'c_box'>
+	<div class = 'central_field' style = 'width: 90%;'>
+	</br>
+		<div class = 'central_field' style = 'width: 100%;'>
+			<h1>Активные опросы</h1>
+		</div>
+	</br>
+	<% if @active_votes != [] %>
+		<table class = 'v_table'>
+			<tr>
+				<th id = 'first'>
+					Вопрос голосования
+				</th>
+				<th>
+					Отдано голосов
+				</th>
+				<th>
+					Дата начала голосования
+				</th>
+				<th>
+					Дата завершения голосования
+				</th>
+			</tr>
+			<% @active_votes.each do |vote| %>
+				<tbody class = 't_link' link_to = '<%= vote_path(vote) %>' >
+				<tr>
+					<td id = 'first' style = 'width: 40%;'>
+						<%= truncate(vote.name, :length => 100) %>
+					</td>
+					<td>
+						<%= vote.voices.count %>
+					</td>
+					<td>
+						<%= my_time(vote.start_date) %>
+					</td>
+					<td>
+						<%= my_time(vote.end_date) %>
+					</td>
+				</tr>
+				</tbody>
+			<% end %>
+		</table>
+	<% else %>
+			<p class = 'istring norm medium-opacity'>Нет ни одного активного опроса...</p>
+	<% end %>
+		<br />
+		<br />
+	</div>
+</div>
+<div class = 'c_box'>
+	<div class = 'central_field' style = 'width: 90%;'>
+	</br>
+		<div class = 'central_field' style = 'width: 100%;'>
+			<h1>Завершённые опросы</h1>
+		</div>
+	</br>
+	<% if @completed_votes != [] %>
+		<table class = 'v_table'>
+			<tr>
+				<th id = 'first'>
+					Вопрос голосования
+				</th>
+				<th>
+					Отдано голосов
+				</th>
+				<th>
+					Дата начала голосования
+				</th>
+				<th>
+					Дата завершения голосования
+				</th>
+			</tr>
+			<% @completed_votes.each do |vote| %>
+				<tbody class = 't_link' link_to = '<%= vote_path(vote) %>' >
+				<tr>
+					<td id = 'first' style = 'width: 40%;'>
+						<%= truncate(vote.name, :length => 100) %>
+					</td>
+					<td>
+						<%= vote.voices.count %>
+					</td>
+					<td>
+						<%= my_time(vote.start_date) %>
+					</td>
+					<td>
+						<%= my_time(vote.end_date) %>
+					</td>
+				</tr>
+				</tbody>
+			<% end %>
+		</table>
+	<% else %>
+			<p class = 'istring norm medium-opacity'>Нет ни одного завершённого опроса...</p>
+	<% end %>
+		<br />
+		<br />
+	</div>
+</div>
+<br />
+<%= navigation_string.html_safe %>

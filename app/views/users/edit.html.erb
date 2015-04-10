@@ -1,0 +1,10 @@
+<% @title = @header = 'Изменение персональных данных' %>
+
+	<%= buttons_in_line(edit_path_buttons).html_safe %><br />
+	<div class = 'central_field' style = 'width: 900px;'>
+	<p id="notice"><%= notice %></b></p>
+	<%= render 'main_inform_update' if params[:tab] == nil or params[:tab] == '' or params[:tab] == 'data_upd' %>
+	<%= render 'password_update' if params[:tab] == 'password_upd' %>
+	<%= render 'email_update' if params[:tab] == 'email_upd' %>
+	<%= render 'notifications_update' if params[:tab] == 'notification_upd' %>
+	</div>

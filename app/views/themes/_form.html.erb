@@ -1,0 +1,40 @@
+<% theme_errors %>
+<div id = 'n_theme' class = 'inline_c1'>
+	<div class = 'inline_mono'></div>
+		<div class = 'left_c2'>
+			<div class = 'central_field' style = 'width: 90%;'>
+				<%= form_for(@theme) do |f| %>
+					<%= f.hidden_field :topic_id, :value => @topic.id %>
+				  <div class="field" <%= @name_f_color.html_safe %>>
+					<%= @name_error.html_safe %>
+					<%= f.label :name, 'Заголовок темы' %><br />
+					<%= f.text_field :name, :size => '78' %>
+				  </div>		  
+				  <div class="field">
+					<%= f.label "Фотографии" %>
+					<%= f.file_field :photos, :multiple => true %>
+				  </div>
+				  <div class="field">
+					<%= f.label "Вложения" %>
+					<%= f.file_field :attachment_files, :multiple => true %>
+				  </div>
+				  <div class="field" <%= @content_f_color.html_safe %>>
+					<%= @content_error.html_safe %>
+					<%= f.label :content, 'Содержимое темы' %><br />
+					<%= f.text_area :content, :rows => '10', :cols => '85', :onKeyUp => 'changingTextarea(this)', :defaultRows => '10' %>
+				  </div>
+				  <div class="actions">
+					<%= f.submit @button_name %>
+				  </div>
+
+				<% end %>
+			</div>
+		</div>
+		<div class = 'right_c1'>	
+		  <div class = 'central_field' style = 'width: 95%;'>
+		  Смайлы
+		  <hr />
+			<%= smiles_draw %>
+		  </div>
+		</div>
+</div>

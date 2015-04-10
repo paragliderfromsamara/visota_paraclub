@@ -1,0 +1,26 @@
+<div class = 'inline_c1'>
+	<%= buttons_in_line(new_article_button).html_safe %>
+	<div class = 'mono_c'>
+		<% if @articles != [] %>
+			<% @articles.each do |article| %>
+				<% case article.article_type_id %>
+				<% when 1 %>
+					<%= article_block(article).html_safe %>
+				<% when 2 %>
+					<%= document_block(article).html_safe %>			
+				<% when 3 %>
+					<%= article_block(article).html_safe %>		
+				<% when 4 %>
+					<%= article_block(article).html_safe %>						
+				<% when 5 %>
+					<%= article_block(article).html_safe %>	
+				<% when 6 %>
+					<%= article_block(article).html_safe %>							
+				<% end %>
+			<% end %>
+		<% else %>
+			<%= no_articles.html_safe %>
+		<% end %>
+	</div>
+</div>
+

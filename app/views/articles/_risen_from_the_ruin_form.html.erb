@@ -1,0 +1,50 @@
+<% article_errors %>
+<%= form_for(@article) do |f| %>
+	<%= f.hidden_field :article_type_id, :value => @type[:value] %>
+	<%= f.hidden_field :assigned_albums, :value => '' %>
+	<%= f.hidden_field :assigned_videos, :value => '' %>
+  <div class="field" <%= @name_f_color.html_safe %>>
+	<%= @name_error.html_safe %>
+    <b><%= f.label :name, 'Название' %></b>
+    <%= f.text_field :name, :size => 100 %>
+  </div>
+  <hr />
+  <div class="field" <%= @content_f_color.html_safe %>>
+	<%= @content_error.html_safe %>
+    <b><%= f.label :content, 'Содержание статьи' %></b><br />
+    <%= f.text_area :content, :rows => '30', :cols => '100' %>
+  </div>
+  <hr />
+  <h2>Контент</h2>
+  <div class="field">
+    <%= f.label :uploaded_photos, 'Загрузить фотографии ' %>
+	<%= f.file_field :uploaded_photos, :multiple => true %>
+  </div> 
+  <% if @albums != [] or @videos != [] %>
+	  <hr />
+	  <% if @albums != [] %>
+	  <div style = 'width: 300px;'  id = 'album_drop_list' class = 'my_drop_list'>
+		<div id = 'choose_album' class = 'selected_value'>Вложить фотоальбомы</div>
+		<div id = 'albums_list' style = 'display: none;' class = 'drop_values'>
+			<% @albums.each do |album| %>
+				<div class = 'drop_value' item-type = 'albums'  val = '<%= album.id.to_s %>' was_selected = 'false' onclick = 'add_content_to_article(this)'><%= album.name %></div>
+			<% end %>
+		</div>
+	  </div>
+	  <% end %>
+	  <% if @videos != [] %>
+	  <div style = 'width: 300px;' id = 'video_drop_list' class = 'my_drop_list'>
+		<div id = 'choose_video' class = 'selected_value'>Вложить видео</div>
+		<div id = 'videos_list' style = 'display: none;' class = 'drop_values'>
+			<% @videos.each do |video| %>
+				<div val = '<%= video.id.to_s %>' item-type = 'videos' was_selected = 'false' class = 'drop_value' onclick = 'add_content_to_article(this)'><%= video.alter_name %></div>
+			<% end %>
+		</div>
+	  </div>
+	  <% end %>
+  <% end %>
+  <hr />
+  <div class="actions">
+    <%= f.submit 'Сохранить' %>
+  </div>
+<% end %>

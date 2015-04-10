@@ -1,0 +1,28 @@
+<%= navigation_string.html_safe %>
+<br />
+<div class = 'central_field' id = 'b_wrapper'>
+	
+	<div id = 'b_wrapper'>	
+		<p id="notice"><%= notice %></p>
+		<br />
+		<%= theme_show_block(true).html_safe %>
+		<%= newMessageFormInitial('none', '#new_message').html_safe %>
+		<% if @messages != [] %>
+			<% i=0 %>
+			<% @messages.each do |message| %>
+				<% i+=1 %>
+				<%= message_theme_box(message, true, i).html_safe %>
+			<% end %>
+		<% else %>
+			<br /><br />
+			<div class = 'central_field' style = 'width: 1000px; height: 100px;'>
+				<p class = 'istring norm'>В теме нет ни одного сообщения...</p>
+			</div>
+		<% end %>
+	</div>  
+</div>
+<br />
+<%= navigation_string.html_safe %>
+<br />
+<br />
+<br />

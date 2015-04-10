@@ -1,0 +1,42 @@
+<% my_message_errors %>
+			<div class = 'central_field' style = 'width: 90%;'>
+				<%= form_for(@message) do |f| %>
+					<%= hidden_field :return_to, :link, :value => @return_to %>
+					<% if action_name != 'edit' %>
+					<%= f.hidden_field :message_id, :value => params[:message][:message_id] if params[:message][:message_id] != nil %>
+					<%= f.hidden_field :photo_id, :value => params[:message][:photo_id] if params[:message][:photo_id] != nil %>
+					<%= f.hidden_field :video_id, :value => params[:message][:video_id] if params[:message][:video_id] != nil %>
+					<%= f.hidden_field :article_id, :value => params[:message][:article_id] if params[:message][:article_id] != nil %>
+					<%= f.hidden_field :topic_id, :value => params[:message][:topic_id] if params[:message][:topic_id] != nil %>
+					<%= f.hidden_field :theme_id, :value => params[:message][:theme_id] if params[:message][:theme_id] != nil %>
+					<%= f.hidden_field :photo_album_id, :value => params[:message][:photo_album_id] %>
+					<% end %>
+				  <div class='field' <%= @content_f_color.html_safe %>>
+					<%= @content_error.html_safe %>
+					<%= f.label :content, 'Текст сообщения' %><br />
+					<%= f.text_area :content, :cols => '76', :rows => '7', :onKeyUp => 'changingTextarea(this)', :defaultRows => '7'%>
+				  </div>
+					<table>
+						<tr>
+							<td style = 'width: 450px; height: 100px;'>	
+								<%= to_uploader_photos.html_safe %>
+							</td>
+							<td>
+							  <div class = 'field'>
+								<%= f.label :attachment_files, 'Вложения: ' %> 
+								<%= f.file_field :attachment_files, :multiple => true %>
+							  </div>
+							</td>
+						</tr>
+					</table>
+
+				  <div class='actions'>
+					<%= f.submit @button_name %>
+				  </div>
+				<% end %>
+			</div>
+	  <div class = 'central_field'>
+	  Смайлы
+	  <hr />
+		<%= smiles_draw %>
+	  </div>

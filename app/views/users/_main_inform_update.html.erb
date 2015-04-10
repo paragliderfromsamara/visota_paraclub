@@ -1,0 +1,86 @@
+
+<h2>Дополнительные сведения</h2>
+<hr />
+<%= form_for(@user) do |f| %>
+<input type = 'hidden' name = 'tab' value = 'data_upd'>
+	<table style = 'width: 100%;'>
+		<% if user_type == 'admin' or user_type == 'super_admin' %>
+			<tr>
+				<td align = 'right' valign = 'middle' style = 'width: 130px; height: 30px;'>
+					<%= f.label :user_group_id, 'Группа' %>
+				</td>
+				<td align = 'left' valign = 'middle'>
+					<%= my_collection_select(@user.user_groups, 'user_group_id', 'user', @user.user_group, '' ) %>
+				</td>
+			</tr>
+		<% end %>
+		<tr>
+			<td align = 'right' valign = 'middle' style = 'width: 150px; height: 30px;'>
+				<%= f.label :full_name, 'Полное имя' %>
+			</td>
+			<td align = 'left' valign = 'middle'>
+				<%= f.text_field :full_name, :class => 't_field' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'middle' style = 'width: 150px; height: 30px;'>
+				<img src="/files/phone.png"  valign = middle > <%= f.label :cell_phone, 'Контактный номер' %> 
+			</td>
+			<td align = 'left' valign = 'middle'>
+				<%= f.text_field :cell_phone, :class => 't_field' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'middle' style = 'width: 150px; height: 30px;'>
+				<img src="/files/skype_logo.png"  valign = middle > <%= f.label :skype, 'Skype' %> 
+			</td>
+			<td align = 'left' valign = 'middle'>
+				<%= f.text_field :skype, :class => 't_field' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'middle' style = 'width: 150px; height: 30px;'>
+				<img src="/files/icq.png"  valign = middle > <%= f.label :icq, 'ICQ' %> 
+			</td>
+			<td align = 'left' valign = 'middle'>
+				<%= f.text_field :icq, :class => 't_field' %>
+			</td>
+		</tr>
+		<tr>
+			<td align = 'right' valign = 'top' style = 'width: 150px; height: 30px;'>
+				<%= f.label :inform, 'О себе' %>
+			</td>
+			<td align = 'left' valign = 'top'>
+				<%= f.text_area :inform, :rows => '10', :cols => '60', :class => 't_area' %>
+			</td>
+		</tr>
+	  </table>
+
+<h2>Аватар и фото</h2>
+<hr />
+
+<table style = 'width: 100%;'>
+	<tr>
+		<td align = 'right' valign = 'middle' style = 'width: 130px; height: 30px;'>
+			<%= f.label :avatar, 'Выберите аватар' %> 
+		</td>
+		<td align = 'left' valign = 'middle'>
+			<%= f.file_field :avatar %><%= f.hidden_field :avatar_cache %>
+		</td>
+	</tr>
+	<tr>
+		<td align = 'right' valign = 'middle' style = 'width: 130px; height: 30px;'>
+			<%= f.label :photo, 'Выберите фотографию' %> 
+		</td>
+		<td align = 'left' valign = 'middle'>
+			<%= f.file_field :photo %><%= f.hidden_field :photo_cache %>
+		</td>
+	</tr>
+</table>
+<hr />
+ <%= f.submit 'Сохранить', :class => 'butt' %>
+<% end %>
+
+<br />
+<br />
+<br />
