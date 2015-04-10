@@ -215,11 +215,12 @@ function initVoteForm(formName)
 									   });
 	function updVoteValuesFields()
 	{
-		$("#test").text('');
+		var l, els;
+		els = f.formElement.find('.vote_value_items');
+		l = els.length;
 		f.formElement.find('.vote_value_items').each(function(i, e){
-																	$("#test").text($("#test").text() + i + "; ");
 																	$(e).find(":text").attr('name', 'vote[vote_values]['+i+']').focus();
-																	if (i>1)
+																	if (l>2)
 																	{
 																		$(e).find("#voteValDelBut").html("<a id = 'delItem' class = 'b_link pointer'>Удалить</a>");
 																		$(e).find("#delItem").bind('click', function(){$(e).remove(); updVoteValuesFields();});

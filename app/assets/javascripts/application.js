@@ -224,10 +224,10 @@ function bottomControl()
 		window_h = $(window).height();
 		if (sum_h < window_h)
 		{
-			//new_middle_h = window_h - $("#top").outerHeight(true) - $("#bottom").outerHeight(true);
-			//$('#middle').height(new_middle_h);
-			$("#bottom").css('position', 'fixed').css('bottom', '0');
-		}else{$("#bottom").css('position', 'relative').css('bottom', 'none');}
+			new_middle_h = window_h - $("#top").outerHeight(true) - $("#bottom").outerHeight(true);
+			$('#middle').height(new_middle_h);
+			//$("#bottom").css('position', 'fixed').css('bottom', '0');
+		}//else{$("#bottom").css('position', 'relative').css('bottom', 'none');}
 		scrollControl();
 	}
 function blocksSumHeight(){return $("#top").outerHeight(true) + $("#middle").outerHeight(true) + $("#bottom").outerHeight(true);} 

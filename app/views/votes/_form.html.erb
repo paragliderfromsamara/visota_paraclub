@@ -13,7 +13,7 @@
 											 :start_year => Time.now.year, 
 											 :default => (1.days.from_now),
 											 :order => [:day, :month, :year],
-											 :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] 
+											 :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], :class => 'c_select' 
 											 %><br /><br />
 			<%= f.label :content, 'Вопрос' %><br />
 			<%= f.text_area :content, :rows => '7', :cols => '100' %>
@@ -68,7 +68,7 @@
 				<%= control_buttons([{:name=> 'Добавить вариант', :id => 'addVoteValue', :access => true, :type => 'add'}]).html_safe %>
 				
 			<% end %>
-			<%= f.submit 'Создать' %>
+			<%= f.submit 'Создать', :class => 'butt' %>
 		<% end %>
 	</div>
 </div>
