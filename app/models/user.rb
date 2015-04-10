@@ -81,6 +81,13 @@ mount_uploader :photo, UserPhotoUploader
 		end
 	return user_avatar
   end
+  def widthAndHeight(link)
+	p = {:width=>0,:height=>0}
+    image = Magick::Image.read(Rails.root.join("public#{link}")).first
+    p[:width] = image.columns
+	p[:height] = image.rows
+	return p
+  end
   def alter_avatar_thumb
 	user_avatar = '/files/undefined_thumb.png'
 		if avatar?

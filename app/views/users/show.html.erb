@@ -1,10 +1,10 @@
 <div class = 'central_field' id = 'm_1000'>
 	<%= control_buttons(show_path_buttons).html_safe %>
 </div>
-<div class = 'central_field' style = 'width: 1000px;'>
+<div class = 'central_field' style = 'width: 1000px; height: 700px;'>
 <p id="notice"><%= notice %></p>
 	<div id = 'left_f' style = 'width: 200px;'>		
-		<%= image_tag @user.alter_avatar %>						
+		<%= image_tag @user.alter_avatar, :width => @user.widthAndHeight(@user.alter_avatar)[:width].to_s + 'px', :height => @user.widthAndHeight(@user.alter_avatar)[:height].to_s + 'px' %>						
 		<p><%= @user.group_name %></p><br/>
 		<h3>Статистика</h3>
 		<hr />
@@ -19,6 +19,7 @@
 	</div>
 	<div id = 'left_f' style = 'width: 700px;'>
 		<div class = 'central_field' style = 'width: 95%;'>
+						<%= @user.widthAndHeight(@user.alter_avatar)[:width] %>
 						<h3>Общая информация</h3>
 						<p>
 							<b>Ник: </b> <span class = 'string'><%= @user.name %></span>

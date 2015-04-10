@@ -1,10 +1,9 @@
 <%= navigation_string.html_safe %>
 <br />
 <div class = 'central_field' id = 'b_wrapper'>
-	
+
 	<div id = 'b_wrapper'>	
-		<p id="notice"><%= notice %></p>
-		<br />
+
 		<%= theme_show_block(true).html_safe %>
 		<%= newMessageFormInitial('none', '#new_message').html_safe %>
 		<% if @messages != [] %>
