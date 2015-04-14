@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
 		end
 	end  
 	@title = @curArtCat[:multiple_name]
-	@articles = Article.find_all_by_article_type_id(@curArtCat[:value], :order => 'accident_date DESC')
+	@articles = Article.find_all_by_article_type_id_and_status_id(@curArtCat[:value], 1, :order => 'accident_date DESC')
 	respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @articles }
@@ -43,8 +43,11 @@ class ArticlesController < ApplicationController
 	@formArticle = Article.new
 	@type = @formArticle.get_type_by_id(params[:c])
 	if userCanCreateArticle? and @type != nil
-		draft = current_user.article_draft
-		@add_functions = "initReportForm(#{draft.id}, '.new_article');"
+		@draft = current_user.article_draft
+    if @draft.article_type_id != 	params[:c].to_i
+      @draft.clean
+      @draft.update_attribute(:article_type_id, params[:c])
+    end
 		@title = "#{@type[:form_title]}"
 		respond_to do |format|
 		  format.html # new.html.erb
@@ -60,8 +63,8 @@ class ArticlesController < ApplicationController
     @formArticle = Article.find(params[:id])
 	if userCanEditArtilcle?(@formArticle)
 		@type = @formArticle.type
-		@add_functions = "initReportForm(#{@formArticle.id}, '.edit_article');"
-		redirect_to '/404' if @type == nil 
+		@draft = @formArticle
+    redirect_to '/404' if @type == nil 
 		@title = "Изменение материала"
 	else 
 		redirect_to '/404'
@@ -74,6 +77,7 @@ class ArticlesController < ApplicationController
   def create
 	if user_type != 'guest' and user_type != 'bunned'
 		params[:article][:user_id] = current_user.id
+    params[:article][:status_id] = 1
 		@article = Article.new(params[:article])
 		params[:v] = params[:article][:article_type_id]
 		@type = @article.get_type_by_id(params[:v])

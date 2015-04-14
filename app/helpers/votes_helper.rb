@@ -23,7 +23,7 @@ module VotesHelper
 				<tr>
 				<td  colspan = '2'>
 					<div class = 'central_field' style = 'width: 95%;'>
-						<span id = 'content' class = 'mText'>#{vote.content}</span>
+						<span id = 'content' class = 'mText'><p>#{vote.content}</p></span>
 						<br /><br />
 						<div id = 'vtValues'>
 						#{vote_values_table(vote)}

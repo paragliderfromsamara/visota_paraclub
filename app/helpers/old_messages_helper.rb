@@ -39,7 +39,7 @@ module OldMessagesHelper
 							</td>
 							<td>
 								<div class = 'central_field' style = 'width: 95%;'>
-									<span align = 'left' id = 'content' class = 'mText'>#{message.content_html}</span>
+									<span align = 'left' id = 'content' class = 'mText'><p>#{message.content_html}</p></span>
 								</div>
 							</td>
 						</tbody>

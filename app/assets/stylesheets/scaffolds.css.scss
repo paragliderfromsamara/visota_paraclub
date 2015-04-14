@@ -649,7 +649,7 @@ img.ava {width: 120px;}
 /* formTable */
 table#formMenuTable {
 					width: 100%;
-					min-height: 150px;
+
 					td#formButtons,td#alButtons{
 									height: 36px;
 									background-color: $fourth_color;
@@ -659,6 +659,7 @@ table#formMenuTable {
 									#format_number:hover, #updTextPrewiew:hover, .hItem:hover{background-color: white; @include animation($time_1);}
 								   }
 					td#formMenus {
+                                    min-height: 150px;
 									.hMenu {display: none;}
 									.sMenu {display: block;}
 								}

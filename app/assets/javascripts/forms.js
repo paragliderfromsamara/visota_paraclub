@@ -34,6 +34,67 @@ function initReportForm(art_id, formName)
 	//form.initForm();
 }
 
+function initDocumentForm(art_id, formName)
+{
+	var f;
+	f = new myForm('article', art_id, formName);
+	f.contentField = f.formElement.find('#article_content');
+	f.nameField = f.formElement.find('#article_name');
+	//f.aButList = [];	
+	//f.getPhsToForm();
+	//f.photosUploader();
+	f.contentFieldMaxLength = 1000;
+	f.parentElID = '#articleForm'; 
+	f.shortContentErr = 'Минимально допустимое количество знаков ' + f.contentFieldMinLength;
+	f.longContentErr = 'Максимально допустимое количество знаков превышено на ';
+	f.nameFieldMaxLength = 100;
+	f.nameFieldMinLength = 1;
+	f.shortNameErr = 'Название не должно быть пустым';
+	f.longNameErr = 'Максимально допустимое количество знаков превышено на ';
+	f.tEditor = new textEditor(f);
+	f.initPanel();
+	setInterval(function(){
+							var cFlag, iFlag;
+							cFlag = f.contentLengthCheck();
+							iFlag = f.imagesLengthCheck();
+							if (cFlag)
+							{
+								f.formElement.find('.butt').removeAttr('disabled');
+							}else{f.formElement.find('.butt').attr('disabled', 'true');};
+						  }, 300);
+	//form.initForm();
+}
+function initAccidentForm(art_id, formName)
+{
+	var f;
+	f = new myForm('article', art_id, formName);
+	f.contentField = f.formElement.find('#article_content');
+	f.nameField = f.formElement.find('#article_name');
+	//f.aButList = [];	
+	f.getPhsToForm();
+	f.photosUploader();
+	f.contentFieldMaxLength = 15000;
+	f.contentFieldMinLength = 75;
+	f.parentElID = '#articleForm'; 
+	f.shortContentErr = 'Минимально допустимое количество знаков статьи ' + f.contentFieldMinLength;
+	f.longContentErr = 'Максимально допустимое количество знаков превышено на ';
+	f.nameFieldMaxLength = 100;
+	f.nameFieldMinLength = 1;
+	f.shortNameErr = 'Название не должно быть пустым';
+	f.longNameErr = 'Максимально допустимое количество знаков превышено на ';
+	f.tEditor = new textEditor(f);
+	f.initPanel();
+	setInterval(function(){
+							var cFlag, iFlag;
+							cFlag = f.contentLengthCheck();
+							iFlag = f.imagesLengthCheck();
+							if (cFlag)
+							{
+								f.formElement.find('.butt').removeAttr('disabled');
+							}else{f.formElement.find('.butt').attr('disabled', 'true');};
+						  }, 300);
+	//form.initForm();
+}
 function initThemeForm(th_id, formName)
 {
 	var form, minContentLength;

@@ -101,8 +101,11 @@ class Article < ActiveRecord::Base
 		errors.add(:name, "Название загружаемого материала не должно быть длиннее 100 знаков") if name.length > 100
 	end
    #Валидация статей end
-   after_save :get_albums, :get_videos, :check_photos_in_content
+   after_save :get_albums, :get_videos, :check_photos_in_content, :if => :is_it_for_valid?
    before_destroy :unbind_albums, :unbind_videos
+   def is_it_for_valid?
+     return true if self.status_id == 1
+   end
    def types
 	[
 		{:value => 3, :form_title => 'Новый отчёт', :add_but_name => 'отчёт', :name => 'Отчёт', :multiple_name => 'Отчёты по мепроприятиям', :link => 'reports'},
@@ -308,6 +311,7 @@ class Article < ActiveRecord::Base
 	if self.photos != [] and self.photos != nil
 		self.photos.each do |ph|
 			self.check_photo_in_content(ph)
+      ph.update_attribute(:status_id, 1) if ph.status == 'draft'
 		end
 	end
   end
@@ -321,5 +325,15 @@ class Article < ActiveRecord::Base
   end 
  
   def clean
+  	if self.photos != []
+  		self.photos.each do |ph|
+  			ph.destroy
+  		end
+  	end
+  	if self.attachment_files != []
+  		self.attachment_files.each do |af|
+  			af.destroy
+  		end
+  	end
   end
 end

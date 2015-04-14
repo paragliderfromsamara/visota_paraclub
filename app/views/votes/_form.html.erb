@@ -31,7 +31,7 @@
 					
 						<% if params[:vote] != nil and params[:vote] != []  %>
 							<% i = 0 %>
-							<% params[:vote][:vote_values].each do |val| %>
+							<% params[:vote][:vote_values].sort{|a,b| a<=>b}.each do |val| %>
 								<tbody id = "vote_value_item" class = 'vote_value_items'>
 								<tr>
 									<td>
@@ -43,7 +43,7 @@
 								</tbody>
 								<% i += 1 %>
 							<% end %>
-						<% else %>
+						<% else %> 
 							<tbody id = "vote_value_item" class = 'vote_value_items'>
 							<tr>
 								<td>

@@ -1,16 +1,39 @@
 <% article_errors %>
-<%= form_for(@article) do |f| %>
+<%= form_for(@formArticle) do |f| %>
 	<%= f.hidden_field :article_type_id, :value => @type[:value] %>
-  <div class="field">
-    <b><%= f.label :accident_date, 'Лётное происшествие от ' %></b>
-    <%= f.datetime_select :accident_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %>
-  </div>
-  <div class="field" <%= @content_f_color.html_safe %> >
-    <b><%= f.label :content, 'Описание лётного происшествия' %></b><br />
-	<%= @content_error.html_safe %>
-    <%= f.text_area :content, :rows => '20', :cols => '120' %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Сохранить' %>
-  </div>
+<table style = 'width: 100%;'>
+    <tr>
+        <td>
+            <%= f.label :accident_date, 'Лётное происшествие от ' %><br />
+            <%= f.datetime_select :accident_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], :html_options => {:class => 'c_select'} %>
+        </td>
+    </tr> 
+	<tr>
+		<td align = 'left'>
+			<%= f.label :content, 'Содержание отчёта' %><br /><br />
+			<table id = 'formMenuTable'>
+				<tr>
+					<td id = 'formButtons'>
+					</td>
+				</tr>
+			</table>
+              <div class = 'central_field' style = 'width:98%;'>
+                  <%= f.text_area :content, :rows => '7', :defaultRows => '7', :class=> 't_area', :onkeyup => 'changingTextarea(this)', :style => 'width: 99%;' %>
+              </div>
+			<div><p class = 'istring <%= @content_f_color if @content_f_color != nil %>' id = 'cLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @content_error.html_safe if @content_error != nil %></span><span id = 'txtErrSrv'><%= @content_error if @content_error != nil %></span></p></div>
+			<div class="actions">
+				<%= f.submit 'Сохранить отчёт', :class => 'butt' %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td id = 'formPhotos'>
+			<div class = 'dropzone' id = 'ph_to_frm'>
+			</div>
+			<div id = 'uploadedPhotos'>
+			</div>
+			<div><p class = 'istring <%= @photos_f_color if @photos_f_color != nil %>' id = 'iLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @photos_error.html_safe if @photos_error != nil %></span><span id = 'txtErrSrv'><%= @photos_error if @photos_error != nil %></span></p></div>
+		</td>
+	</tr>
+</table>
 <% end %>

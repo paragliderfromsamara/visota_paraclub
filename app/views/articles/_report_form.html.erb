@@ -5,48 +5,25 @@
 	<%= f.hidden_field :assigned_albums, :value => @formArticle.already_assigned_albums %>
 	<%= f.hidden_field :assigned_videos, :value => @formArticle.already_assigned_videos %>
 	
-	<%= f.label :accident_date, 'Дата описываемого события' %><br />
-	<%= f.date_select :accident_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %><br /><br />
 	
-	<br />
-	<div class="field">
-		
-	</div> 
+
     <div class = 'field' >
 		<%= f.label :attachment_files, 'Загрузить вложения ' %> 
 		<%= f.file_field :attachment_files, :multiple => true %>
     </div>
-				  <% if @albums != [] or @videos != [] %>
-					   <br />
-					  <% if @albums != [] %>
-					  <div style = 'width: 300px;'  id = 'album_drop_list' class = 'my_drop_list'>
-						<div id = 'choose_album' class = 'selected_value'>Вложить фотоальбомы</div>
-						<div id = 'albums_list' style = 'display: none;' class = 'drop_values'>
-							<% @albums.each do |album| %>
-								<div class = 'drop_value' item-type = 'albums'  val = '<%= album.id.to_s %>' was_selected = 'false' onclick = 'add_content_to_article(this)'><%= album.name %></div>
-							<% end %>
-						</div>
-					  </div>
-					  <% end %>
-					  <% if @videos != [] %>
-					  <div style = 'width: 300px;' id = 'video_drop_list' class = 'my_drop_list'>
-						<div id = 'choose_video' class = 'selected_value'>Вложить видео</div>
-						<div id = 'videos_list' style = 'display: none;' class = 'drop_values'>
-							<% @videos.each do |video| %>
-								<div val = '<%= video.id.to_s %>' item-type = 'videos' was_selected = 'false' class = 'drop_value' onclick = 'add_content_to_article(this)'><%= video.alter_name %></div>
-							<% end %>
-						</div>
-					  </div>
-					  <% end %>
-				  <% end %>
-				  <br /> <br />
 		<div class = 'field'>
 			
 			<table style = 'width: 100%;'>
+                <tr>
+                    <td>
+                        <%= f.label :accident_date, 'Дата описываемого события' %><br />
+                        <%= f.date_select :accident_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %><br /><br />
+                    </td>
+                </tr>
 				<tr>
 					<td>
 						<%= f.label :name, 'Название мероприятия' %><br />
-						<%= f.text_field :name, :size => 100, :class => 't_field' %>	<br />
+						<%= f.text_field :name, :size => 100, :class => 't_field', :style => 'width: 99%;' %>	<br />
 						<div>
 							<p class = 'istring <%= @name_f_color if @name_f_color != nil %>' id = 'nLength'>
 								<span id = 'txtL'></span> 
@@ -74,7 +51,9 @@
 								</td>
 							</tr>
 						</table>
-						<%= f.text_area :content, :cols => 90, :rows => '7', :defaultRows => '7', :class=> 't_area', :onkeyup => 'changingTextarea(this)' %>
+                        <div class = 'central_field' style = 'width:98%;'>
+                            <%= f.text_area :content, :rows => '7', :defaultRows => '7', :class=> 't_area', :onkeyup => 'changingTextarea(this)', :style => 'width: 99%;' %>
+                        </div>
 						<div><p class = 'istring <%= @content_f_color if @content_f_color != nil %>' id = 'cLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @content_error.html_safe if @content_error != nil %></span><span id = 'txtErrSrv'><%= @content_error if @content_error != nil %></span></p></div>
 						<div class="actions">
 							<%= f.submit 'Сохранить отчёт', :class => 'butt' %>
@@ -83,22 +62,15 @@
 				</tr>
 				<tr>
 					<td id = 'formPhotos'>
-						<div><p class = 'istring <%= @photos_f_color if @photos_f_color != nil %>' id = 'iLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @photos_error.html_safe if @photos_error != nil %></span><span id = 'txtErrSrv'><%= @photos_error if @photos_error != nil %></span></p></div>
 						<div class = 'dropzone' id = 'ph_to_frm'>
 						</div>
 						<div id = 'uploadedPhotos'>
 						</div>
 						<div><p class = 'istring <%= @photos_f_color if @photos_f_color != nil %>' id = 'iLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @photos_error.html_safe if @photos_error != nil %></span><span id = 'txtErrSrv'><%= @photos_error if @photos_error != nil %></span></p></div>
-	
 					</td>
 				</tr>
-			</table>
-						
+			</table>			
 		</div>
-
-				
-
-
 <% end %>
 </div>
  <br /> <br /> <br /> <br />

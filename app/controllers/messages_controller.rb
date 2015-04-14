@@ -314,9 +314,9 @@ class MessagesController < ApplicationController
 	if isEntityOwner?(message)
 		@photo = Photo.new(:message_id => message.id, :user_id => message.user.id, :link => params[:message][:uploaded_photos], :status_id => 0)
 		if @photo.save
-			render :json => {:message => 'success', :photoID => @photo.id }, :status => 200
+			render :json => {:message => 'success', :photoID => @photo.id }
 		else
-			render :json => {:error => @photo.errors.full_messages.join(',')}, :status => 400
+			render :json => {:error => @photo.errors.full_messages.join(',')}
 		end
 	else
 		redirect_to '/404'

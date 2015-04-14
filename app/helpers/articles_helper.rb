@@ -17,6 +17,9 @@ module ArticlesHelper
 								<p class = 'istring_m norm medium-opacity'>
 									Автор #{link_to @article.user.name, @article.user, :class => 'b_link_i'}
 								</p>
+								<p class = 'istring_m norm medium-opacity'>
+									Категория #{link_to @article.type[:multiple_name], articles_path(:c => @article.type[:link]), :class => 'b_link_i'}
+								</p>
 							</td>
 							<td align = 'right' valign='middle'>
 								<p class = 'istring_m norm medium-opacity'>Размещён #{my_time(@article.alter_date)}</p>

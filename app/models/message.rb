@@ -13,7 +13,7 @@ class Message < ActiveRecord::Base
   has_many :messages 
   require 'will_paginate'
   auto_html_for :content do
-	#html_escape
+	html_escape
 	my_youtube_msg(:width => 480, :height => 360, :span => true)
 	my_vimeo(:width => 480, :height => 360, :span => true)
 	vk_video_msg(:width => 480, :height => 360, :span => true)
@@ -29,7 +29,7 @@ class Message < ActiveRecord::Base
   #start_quote
   #end_quote
   after_create :statusControl
-  after_save :updatePhotosStatusesAfterSave#, :check_photos_in_content #проверить наличие хэш тэгов фотографий, прикреплённых к сообщению, в тексте перед сохранением
+  after_save :updatePhotosStatusesAfterSave, :check_photos_in_content #проверить наличие хэш тэгов фотографий, прикреплённых к сообщению, в тексте перед сохранением
   before_destroy :clean_binded_entities
   #before_save :make_first_message_id #хрен знает зачем это нужно...
   #-Валидации--------------------------------------------------
@@ -72,7 +72,7 @@ class Message < ActiveRecord::Base
 			elsif ph.status == 'normal' and self.v_status == 'visible'
 				ph.update_attribute(:status_id, 1) #normal
 			end
-			check_photo_in_content(ph)
+		  #check_photo_in_content(ph)
 		end
 	end
   end

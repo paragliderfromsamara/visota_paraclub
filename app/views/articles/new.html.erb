@@ -1,25 +1,31 @@
 <div class = 'central_field' style = "width: 97%;">
 	<% case @type[:value] %>
 	<% when 1 %>
+        <% @add_functions = "initAccidentForm(#{@draft.id}, '.new_article');" %>
 		<%= render 'accident_form' %>
 	<% when 2 %>
+         <% @add_functions = "initDocumentForm(#{@draft.id}, '.new_article');" %>
 		<%= render 'document_form' %>
 	<% when 3 %>
+        <% @add_functions = "initReportForm(#{@draft.id}, '.new_article');" %>
 		<% @albums = PhotoAlbum.find_all_by_article_id(nil) %>
 		<% @videos = Video.find_all_by_article_id(nil) %>
 		<%= render 'report_form' %>
 	<% when 4 %>
+        <% @add_functions = "initReportForm(#{@draft.id}, '.new_article');" %>
 		<% @albums = PhotoAlbum.find_all_by_article_id(nil) %>
 		<% @videos = Video.find_all_by_article_id(nil) %>
 		<%= render 'club_articles_form' %>
 	<% when 5 %>
+        <% @add_functions = "initReportForm(#{@draft.id}, '.new_article');" %>
 		<% @albums = PhotoAlbum.find_all_by_article_id(nil) %>
 		<% @videos = Video.find_all_by_article_id(nil) %>
 		<%= render 'review_form' %>
 	<% when 6 %>
+        <% @add_functions = "initReportForm(#{@draft.id}, '.new_article');" %>
 		<% @albums = PhotoAlbum.find_all_by_article_id(nil) %>
 		<% @videos = Video.find_all_by_article_id(nil) %>
-		<%= render 'risen_from_the_ruin_form' %>
+		<%= render 'risen_from_the_ruin_form' %> 
 	<% else %>
 		<%= render 'accident_form' %>
 	<% end %>
