@@ -21,6 +21,7 @@
                   <%= f.text_area :content, :rows => '7', :defaultRows => '7', :class=> 't_area', :onkeyup => 'changingTextarea(this)', :style => 'width: 99%;' %>
               </div>
 			<div><p class = 'istring <%= @content_f_color if @content_f_color != nil %>' id = 'cLength'><span id = 'txtL'></span> <span id = 'txtErr'><%= @content_error.html_safe if @content_error != nil %></span><span id = 'txtErrSrv'><%= @content_error if @content_error != nil %></span></p></div>
+              <br /><%= f.label :visibility_status_id, ('<img src="/files/privacy_g.png" style = "width: 20px;float: left;"/> Скрыть от не авторизованных пользователей').html_safe %> <%= f.check_box :visibility_status_id, {:class=>'check_box'}, '2', '1' %> <br /> 
 			<div class="actions">
 				<%= f.submit 'Сохранить отчёт', :class => 'butt' %>
 			</div>

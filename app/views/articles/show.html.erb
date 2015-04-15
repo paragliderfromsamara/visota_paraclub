@@ -1,10 +1,13 @@
 <%= navigation_string.html_safe %>
 <br />
-<%= article_show_block.html_safe %>
-<% i = 1 %>
-<%= article_videos_block(i) %>
-<% i += 1 if @article.videos.count != 0 %>
-<%= article_albums_block(i) %>
+<div id = 'b_wrapper'>	
+    <%= top_article_buttons.html_safe %>
+    <%= article_show_block.html_safe %>
+    <% i = 1 %>
+    <%= article_videos_block(i) %>
+    <% i += 1 if @article.videos.count != 0 %>
+    <%= article_albums_block(i) %>
+</div>
 <br />
 <br />
 <%= navigation_string.html_safe %>

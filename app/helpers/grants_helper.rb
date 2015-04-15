@@ -97,6 +97,9 @@ module GrantsHelper
 	def userCanEditArtilcle?(article)
 		isEntityOwner?(article) || is_super_admin?
 	end
+  def userCanDeleteArticle(article)
+    return true if Time.now < (article.created_at + 1.day) 
+  end
 	#articles_part end
 	#events_part
 	def userCanEditEvent?(event)

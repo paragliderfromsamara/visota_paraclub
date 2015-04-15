@@ -76,7 +76,7 @@ module PhotoAlbumsHelper
 				 {:name => 'Удалить', :access => isEntityOwner?(@album), :type => 'del', :link => photo_album_path(@album), :rel => 'nofollow', :data_confirm => 'Вы уверены что хотите удалить альбом и всё, что с ним связанно?', :data_method => 'delete'}
 			]
 		end
-		val = "<tr><td style = 'height: 40px;' align='left' valign = 'middle' colspan = '2'>#{control_buttons(v)}</td></tr>" if v != []
+		val = "#{control_buttons(v)}" if v != []
 		return val
 	end	
 	def bottom_album_buttons(album, pathName) #кнопки в нижней части блока

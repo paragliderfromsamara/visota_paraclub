@@ -65,6 +65,11 @@ h3 {
 	font-size: 13pt; 
 	color: $text_color_1;
   }
+h4 {
+  	font-family: $font_family_3; 
+  	font-size: 11pt; 
+  	color: $text_color_1;
+    }
 b  {
 	font-family: $font_family_2;
   }
@@ -187,7 +192,7 @@ p.string {font-family: $font_family_1; font-size: 15px;}
 img.ava {width: 120px;}
 #wrapper, #top_photo, #top, #bottom {position: relative; width: 100%; min-width: 1200px; z-index: 1;}
 #middle, #menuWrapper, #logoField   {position: relative; max-width: 1200px; min-width: 1200px; margin-left: auto; margin-right: auto; z-index: 1;}
-#middle{/*background-color: #d9eaf9;*/min-height: 100px; }
+#middle{/*background-color: #d9eaf9;*/min-height: 500px; }
 #bottom{background-color: $main_color; height: 200px;}
 #mLogo 
 {
@@ -426,7 +431,7 @@ img.ava {width: 120px;}
 		position: relative;
 		background-color:$fourth_color;
 		width: 100%;
-		h3 {		padding-top: 5px;
+		h3, h4 {		padding-top: 5px;
 					padding-bottom: 5px;
 					padding-left: 5px;
 			}
@@ -451,6 +456,10 @@ img.ava {width: 120px;}
 	{
 		width: 1000px;
 	}
+#m_90percent
+    	{
+    		width: 90%;
+    	}
 #m_full {
 			width: 100%;
 			height: 50px;

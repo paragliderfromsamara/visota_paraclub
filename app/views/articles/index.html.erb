@@ -1,8 +1,13 @@
 <div class = 'central_field' id = 'm_1000'>
 	<%= articles_path_buttons.html_safe %>
 </div>
-<div class = 'central_field' style = 'width: 1000px;'>
-<%= new_article_button.html_safe %>
+
+	<% if !is_not_authorized? %>
+			<div class = 'c_box'><div class = 'central_field' id = 'm_1000wh'><%= new_article_button.html_safe %></div></div>	
+	<% end %>
+<div class = 'c_box'>
+    <div class = 'central_field' id = 'm_1000wh'>
+    <br />
 <h1><%= @curArtCat[:multiple_name] %></h1><br />
 <% if @articles != [] %>
 	<% curYear = nil %>
@@ -36,4 +41,7 @@
 <% else %>
 	<p class = 'istring norm'>В данной категории нет материалов...</p>
 <% end %>
+</div>
+ <br />
+ <br />
 </div>

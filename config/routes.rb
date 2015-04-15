@@ -17,7 +17,7 @@ VisotaParaclubRu::Application.routes.draw do
 	get "admin_tools/hidden_articles"  #скрытые статьи
 	get "admin_tools/hidden_photos"    #скрытые фотографии
 	get "admin_tools/deleted_entities" #удалённые объекты
-    get "admin_tools/hidden_entities"  #скрытые объекты	
+  get "admin_tools/hidden_entities"  #скрытые объекты	
 	get "admin_tools/site_images" #изображения для сайта	
 	get "admin_tools/entities_recovery"	#Восстановление удалённых объектов
 	get "admin_tools/disabled_events" #Скрытые новости
@@ -118,6 +118,7 @@ VisotaParaclubRu::Application.routes.draw do
   get "users/check_email_and_name"
   get "users/videos"
   get "users/photo_albums"
+  get "users/articles"
   get "users/steps"
   match '/password_mail_sent', :to => 'users#password_mail_sent'
   match '/make_mail', :to => 'users#make_mail'
@@ -132,6 +133,7 @@ VisotaParaclubRu::Application.routes.draw do
   match "/users/:id/videos", :to => "users#videos"
   match "/users/:id/steps", :to => "users#steps"
   match '/users/:id/photo_albums', :to => 'users#photo_albums'
+  match '/users/:id/articles', :to => 'users#articles'
   #users_controller
   
   #sessions_controller

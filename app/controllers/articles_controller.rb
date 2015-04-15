@@ -11,8 +11,9 @@ class ArticlesController < ApplicationController
 		end
 	end  
 	@title = @curArtCat[:multiple_name]
-	@articles = Article.find_all_by_article_type_id_and_status_id(@curArtCat[:value], 1, :order => 'accident_date DESC')
-	respond_to do |format|
+  vStatus = (is_not_authorized?)? [1]:[1,2]
+	@articles = Article.find_all_by_article_type_id_and_status_id_and_visibility_status_id(@curArtCat[:value], 1, vStatus, :order => 'accident_date DESC')
+	  respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @articles }
     end
@@ -118,11 +119,11 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1.json
   def destroy
     @article = Article.find(params[:id])
-	type = @article.get_type_by_id(@article.article_type_id)
+	  type = @article.get_type_by_id(@article.article_type_id)
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to type[:link] }
+      format.html { redirect_to articles_path(:c=>type[:link]) }
       format.json { head :no_content }
     end
   end

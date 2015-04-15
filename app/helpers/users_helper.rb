@@ -69,7 +69,7 @@ def user_index_list(user)
 end
 
 def user_contacts(user)
-	if user_type != 'guest' and user_type != 'bunned' and user_type != 'new_user' and user
+	if !is_not_authorized? and !user.nil?
 		"<table>
 				#{data_container(:name => "E-mail:", :value => user.email)}
 				#{data_container(:name => "Контактный номер:", :value => user.cell_phone) if user.cell_phone?}
@@ -86,6 +86,21 @@ def show_path_buttons
 		{:name => 'Изменить профиль', :access =>  userCanEditUserCard?(@user), :type => 'edit', :link => edit_user_path(:id => @user.id), :id => 'change_password'},
 		{:name => 'Уведомления', :title => "Уведомления на почтовый ящик", :access => userCanEditUserCard?(@user), :type => 'bing', :link => edit_user_path(:id => @user.id, :tab => 'notification_upd'), :id => 'change_notification'}
 	]	
+end
+def last_user_videos(i)
+  videos = @user.videos.order("created_at DESC").limit(3)
+  v = ""
+  if videos != []
+    videos.each { |video| v += video_index_block(video)}
+  	p = {
+  			:tContent => "<br />#{control_buttons([{:name => 'Все видео пользователя', :access => true, :type => 'follow', :link => "/users/#{@user.id.to_s}/videos"} ])}#{v}</br>", 
+  			:idLvl_2 => 'm_90percent',
+        :parity => i
+  		}
+      v = c_box_block(p)
+  end
+	
+  return v
 end
 def edit_path_buttons
 	
@@ -109,7 +124,7 @@ def index_path_buttons(user)
 end
 
 def data_container(data)
-	"<tr><td><p class = 'string'>#{data[:name]}</p></td><td><p class = 'string'>#{data[:value]}</p></td></tr>"
+	"<tr><td><p class = 'istring_m medium-opacity'>#{data[:name]}</p></td><td><p class = 'istring_m'>#{data[:value]}</p></td></tr>"
 end
 
 def users_paths_buttons #buttons => {:name => 'Перейти', :title => "Перейти на страницу пилота", :access => ['all'], :type => 'b_green', :link => user_path(user)}

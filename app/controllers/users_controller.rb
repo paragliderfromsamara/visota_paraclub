@@ -97,6 +97,29 @@ include UsersHelper
 		redirect_to '/404'
 	end
   end
+  def articles
+      @user = User.find_by_id(params[:id])
+    	if @user != nil
+    		@title = "Материалы пользователя #{@user.name}"
+      	article = Article.new
+      	@curArtCat = article.types.first
+      	article.types.each do |t|
+      		if params[:c] == t[:link]
+      			@curArtCat = t
+      			break
+      		end
+      	end  
+      	@title = @curArtCat[:multiple_name]
+        vStatus = (is_not_authorized?)? [1]:[1,2]
+      	@articles = Article.find_all_by_article_type_id_and_status_id_and_visibility_status_id_and_user_id(@curArtCat[:value], 1, vStatus, @user.id, :order => 'accident_date DESC')
+      	  respond_to do |format|
+            format.html {render 'articles/index'}# index.html.erb
+            format.json { render :json => @articles }
+          end
+      else
+    		redirect_to '/404'
+    	end
+    end
   # GET /users/1
   # GET /users/1.json
   def show 

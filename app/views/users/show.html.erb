@@ -1,37 +1,53 @@
-<div class = 'central_field' id = 'm_1000'>
-	<%= control_buttons(show_path_buttons).html_safe %>
+<div class = 'c_box'>
+    <div class = 'central_field' id = 'm_1000wh'>
+        <%= control_buttons(show_path_buttons).html_safe %>
+    </div>
 </div>
-<div class = 'central_field' style = 'width: 1000px; height: 700px;'>
-<p id="notice"><%= notice %></p>
-	<div id = 'left_f' style = 'width: 200px;'>		
-		<%= image_tag @user.alter_avatar, :width => @user.widthAndHeight(@user.alter_avatar)[:width].to_s + 'px', :height => @user.widthAndHeight(@user.alter_avatar)[:height].to_s + 'px' %>						
-		<p><%= @user.group_name %></p><br/>
-		<h3>Статистика</h3>
-		<hr />
-		<table style = 'width: 100%;'>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Тем:</td><td align = 'center' valign = 'middle'><%= @user.themes.count.to_s %></td></tr>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Сообщений:</td><td align = 'center' valign = 'middle'><%= @user.messages.count.to_s %></td></tr>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Фотоальбомов:</td><td align = 'center' valign = 'middle'><%= @user.photo_albums.count.to_s %></td></tr>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Видео:</td><td align = 'center' valign = 'middle'><%= @user.videos.count.to_s %></td></tr>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Статей:</td><td align = 'center' valign = 'middle'>0</td></tr>
-			<tr><td style = 'width: 100px; height: 16px;' align = 'left' valign = 'middle'>Материалов:</td><td align = 'center' valign = 'middle'>0</td></tr>
-		</table>
-	</div>
-	<div id = 'left_f' style = 'width: 700px;'>
-		<div class = 'central_field' style = 'width: 95%;'>
-						<%= @user.widthAndHeight(@user.alter_avatar)[:width] %>
-						<h3>Общая информация</h3>
-						<p>
-							<b>Ник: </b> <span class = 'string'><%= @user.name %></span>
-						</p>
-						<%= ("<p><b>Полное имя: </b>#{@user.full_name}</p><br />").html_safe if @user.full_name? and user_type != 'guest' and user_type != 'bunned' and user_type != 'new_user' %>
-						<%= ("<p><b>О себе:</b> #{@user.inform}</p>").html_safe if @user.inform? %>
-						<br />
-							<h3>Контактные данные</h3>
 
-						<p><%= user_contacts(@user).html_safe %></p>
-		</div>
-	</div>
-
+<div class = 'c_box even'>
+    <br />
+    <div class = 'central_field' style = 'width: 1000px;'>
+        <p id="notice"><%= notice %></p>
+        <table style = 'width:100%;'>
+            <tr>
+                <td align = 'center' valign = 'top' style = 'width:200px'>
+                		<%= image_tag @user.alter_avatar, :width => @user.widthAndHeight(@user.alter_avatar)[:width].to_s + 'px', :height => @user.widthAndHeight(@user.alter_avatar)[:height].to_s + 'px' %>						
+                		<p class = 'istring_m medium-opacity'><%= @user.group_name %></p>
+                </td>
+                <td align = 'left' valign = 'top'>
+            		<div class = 'central_field' style = 'width: 95%;'>
+            						<h4>Общая информация</h4>
+            						<p>
+            							<span class = 'istring_m norm'>Ник:</span> <span class = 'istring_m'><%= @user.name %></span>
+            						</p>
+                                    <% if !is_not_authorized? %>
+                                    <p>
+                                        <span class = 'istring_m medium-opacity'>Полное имя: </span> <span class = 'istring_m'><%= @user.full_name %></span>
+                                    </p>
+                                    <% end %>
+                                    <% if @user.inform? %>
+                                        <br />
+                                        <p>
+                                            <span class = 'istring_m medium-opacity'>О себе:</span> <span class = 'istring_m'><%= @user.inform %></span>
+                                        </p>
+                                    <% end %>
+            						<br />
+            						<h4>Контактные данные</h4>
+            						<p><%= user_contacts(@user).html_safe %></p>
+            		</div>
+                    <br />
+                    <br />
+                </td>
+            </tr>
+        </table>
 </div>
+</div>
+<% i = 0 %>
+<% if @user == current_user %>
+    <% if @user.videos != [] %>
+        <% i+=1 %>
+        <div class = 'cBoxSplitter'><h4>Крайние размещенные видео</h4></div>
+        <%= last_user_videos(i).html_safe %>
+    <% end %>
+<% end %>
 

@@ -1,9 +1,8 @@
 module ArticlesHelper
 	
 	def article_show_block
-			html = "
-				   <table style = 'width: 100%;'>
-						#{top_article_buttons}
+			html = "   
+           <table style = 'width: 100%;'>
 						<tr>
 							<td align='left' valign='middle'>
 								<h3>#{@article.alter_name}</h3>
@@ -31,7 +30,6 @@ module ArticlesHelper
 								#{article_list_photos(@article)}
 							</td>
 						</tr>
-						#{bottom_article_buttons}	
 				   </table>
 				  "
 		p = {
@@ -41,16 +39,20 @@ module ArticlesHelper
 			}
 		return c_box_block(p).html_safe
 	end
-	def bottom_article_buttons
-		buttons = [
-					{:name => 'Изменить', :access => userCanEditArtilcle?(@article), :type => 'edit', :link => edit_article_path(@article, :v => @article.article_type_id)}	
-				  ]
-		return "<tr><td colspan = '2'>#{control_buttons(buttons)}</td></tr>"
-	end
 	def top_article_buttons
-		buttons = []
-		return control_buttons(buttons)
+		buttons = [
+                {:name => 'К списку материалов', :access => true, :type => 'follow', :link => articles_path},
+                {:name => 'К материалам пользователя', :access => true, :type => 'follow', :link => "/users/#{@article.user_id}/articles"},
+				        {:name => 'Редактировать', :access => userCanEditArtilcle?(@article), :type => 'edit', :link => edit_article_path(@article, :v => @article.article_type_id)},
+                {:name => 'Удалить', :access => true, :type => 'del', :link => article_path(@article), :data_method => 'delete', :rel => 'no-follow', :data_confirm => 'Вы уверены, что хотите удалить данный материал?'}
+                	
+				      ]
+		return "<div class = 'c_box'><div class = 'central_field' id = 'm_1000wh'>#{control_buttons(buttons)}</div></div>"
 	end
+#	def top_article_buttons
+#		buttons = []
+#		return control_buttons(buttons)
+#	end
 	def articleInformation(article)
 		''
 	end
@@ -59,9 +61,10 @@ module ArticlesHelper
 		buttons = []
 		v_status_id = 1 if is_not_authorized?
 		v_status_id = [1,2] if !is_not_authorized?
+    link = (@user == nil)? articles_path: "\/users\/#{@user.id}\/articles"
 		art.types.each do |t|
 			articles = Article.find_all_by_article_type_id_and_status_id_and_visibility_status_id(t[:value], 1, v_status_id)
-			but = {:name => "#{t[:multiple_name]} [#{articles.count}]", :access => true, :type => 'b_grey', :link => articles_path(:c=> t[:link])}
+			but = {:name => "#{t[:multiple_name]} [#{articles.count}]", :access => true, :type => 'b_grey', :link => "#{link}?c=#{t[:link]}"}
 			but[:selected] = true if t == @curArtCat
 			buttons[buttons.length] = but
 		end

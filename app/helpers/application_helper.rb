@@ -457,7 +457,7 @@ end
 		tContent = ""
 		fContent = ""
 		bg = ""
-		tContent = "<div class = 'central_field#{" "+p[:classLvl_2] if p[:classLvl_2] != nil}'#{" id='#{p[:idLvl_1]}'" if p[:idLvl_1] != nil}>#{p[:tContent]}</div>" if p[:tContent] != nil
+		tContent = "<div class = 'central_field#{" "+p[:classLvl_2] if p[:classLvl_2] != nil}'#{" id='#{p[:idLvl_2]}'" if p[:idLvl_2] != nil}>#{p[:tContent]}</div>" if p[:tContent] != nil
 		fContent = p[:fContent] if p[:fContent] != nil
 		bg = "<div class='#{p[:classBg]}'></div>" if p[:classBg] != nil
 		val = "
