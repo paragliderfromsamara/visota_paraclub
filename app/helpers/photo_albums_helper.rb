@@ -41,7 +41,7 @@ module PhotoAlbumsHelper
 				  "
 		p = {
 				:tContent => html, 
-				:idLvl_1 => "b_middle",
+				:idLvl_2 => "b_middle",
 				:parity => i
 			}
 		v = top_album_buttons(album, pathName)

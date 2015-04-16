@@ -142,7 +142,7 @@ include UsersHelper
 	if user_type == 'guest'
 		@user = User.new
 		@action_type = 'new'
-		@title = @header = "Регистрация на сайте"
+		@title = "Регистрация на сайте"
 		@add_functions = "userFieldsChecking();"
 		respond_to do |format|
 		  format.html # new.html.erb
@@ -302,7 +302,7 @@ include UsersHelper
   
   def remember_password
 	redirect_to '/404' if signed_in?
-	@header = @title = 'Восстановление пароля'
+	@title = 'Восстановление пароля'
   end
   
   def make_mail
@@ -348,8 +348,23 @@ include UsersHelper
   def check_email_and_name
 	user = nil
 	@status = {:status => 'false'}
-	user = User.find_by_email(params[:email]) if params[:email] != nil and params[:email] != ''
-	user = User.find_by_name(params[:name]) if params[:name] != nil and params[:name] != ''
+  users = User.all
+  users.each do |u|
+    if params[:email] != ''
+      if u.name.mb_chars.downcase == params[:name].mb_chars.downcase
+        @status = {:status => 'true'}
+        break
+      end
+    end
+    if params[:name] != ''
+      if u.name.mb_chars.downcase == params[:name].mb_chars.downcase
+        @status = {:status => 'true'}
+        break
+      end
+    end
+  end
+#	user = User.find_by_email(params[:email]) if params[:email] != nil and params[:email] != ''
+#	user = User.find_by_name(params[:name]) if params[:name] != nil and params[:name] != ''
 	@status = {:status => 'true'} if user != nil
 	respond_to do |format|
 		format.json { render :json => @status }

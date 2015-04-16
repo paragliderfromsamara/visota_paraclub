@@ -1,40 +1,50 @@
 <% @title = 'Уведомления на почту' %>
 <% @mailer = @user.mailer %>
-		
-					<b>Уведомления</b> на электронный адрес: <%= @mailer.email %> <%= link_to 'Изменить', edit_user_path(:id => @user.id, :tab => "email_upd"), :class => "table_content_links" if (@mailer.user == current_user and user_type != 'bunned') or user_type == 'admin' %>
-					<hr size = '1px' style = 'width: 100%; border-style: groove;' />
-					<%= form_for(@mailer, :url => "/update_mailer?id=#{@mailer.id.to_s}") do |f| %>
-					<div class = "central_block" style = "width: 700px;">
-						<div id = "form_first_block" style = "display: block;">
-							<%= f.check_box :album, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :album, "Новые альбомы" %><br />
-							<%= f.check_box :video, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :video, "Новые видео" %><br />
-							<%= f.check_box :article, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :article, "Новые статьи" %><br />
-							<%= f.check_box :message, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :message, "Новые сообщения" %><br />
-							<%= f.check_box :photo_comment, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :photo_comment, "Коментарии к фотографиям" %><br />
-							<%= f.check_box :video_comment, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
-							<%= f.label :video_comment, "Коментарии к видео" %>
-						</div>
-						<div id = "form_second_block" style = "display: none;">
-							<%= f.check_box :album, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :album, "Новые альбомы" %><br />
-							<%= f.check_box :video, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :video, "Новые видео" %><br />
-							<%= f.check_box :article, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :article, "Новые статьи" %><br />
-							<%= f.check_box :message, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :message, "Новые сообщения" %><br />
-							<%= f.check_box :photo_comment, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :photo_comment, "Коментарии к фотографиям" %><br />
-							<%= f.check_box :video_comment, {:class => 'check_box'}, "yes", "no" %>
-							<%= f.label :video_comment, "Коментарии к видео" %>
-							<br />
-							<%= f.submit 'Сохранить', :class => 'butt' %>
-						</div>
-						<a style = "cursor: pointer;" name = "form" onclick = "replace_block(this)" title = "Редактировать список уведомлений" class = 'b_link'>Редактировать</a>
-					</div>
-					<% end %>
+<div class = 'cBoxSplitter'>
+    <div class = 'central_field' id = 'm_1000wh'>
+         <h3><%= @title %></h3>
+     </div>
+</div>
+<div class = 'c_box even'>
+    <div class = 'central_field' id = 'm_1000wh'>
+        <br />
+           <span class = 'istring norm medium-opacity'>Уведомления на электронный адрес:</span> <span class = 'istring norm'><%= @mailer.email %></span> <%= link_to 'Изменить', edit_user_path(:id => @user.id, :tab => "email_upd"), :class => "b_link" if (@mailer.user == current_user and user_type != 'bunned') or user_type == 'admin' %><br />
+		<%= form_for(@mailer, :url => "/update_mailer?id=#{@mailer.id.to_s}") do |f| %>
+		<div class = "central_block" style = "width: 700px;">
+			<div id = "form_first_block" style = "display: block;">
+				<%= f.check_box :album, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :album, "Новые альбомы" %><br />
+				<%= f.check_box :video, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :video, "Новые видео" %><br />
+				<%= f.check_box :article, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :article, "Новые статьи" %><br />
+				<%= f.check_box :message, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :message, "Новые сообщения" %><br />
+				<%= f.check_box :photo_comment, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :photo_comment, "Коментарии к фотографиям" %><br />
+				<%= f.check_box :video_comment, {:disabled => true, :class => 'check_box'}, "yes", "no" %>
+				<%= f.label :video_comment, "Коментарии к видео" %>
+			</div>
+			<div id = "form_second_block" style = "display: none;">
+				<%= f.check_box :album, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :album, "Новые альбомы" %><br />
+				<%= f.check_box :video, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :video, "Новые видео" %><br />
+				<%= f.check_box :article, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :article, "Новые статьи" %><br />
+				<%= f.check_box :message, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :message, "Новые сообщения" %><br />
+				<%= f.check_box :photo_comment, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :photo_comment, "Коментарии к фотографиям" %><br />
+				<%= f.check_box :video_comment, {:class => 'check_box'}, "yes", "no" %>
+				<%= f.label :video_comment, "Коментарии к видео" %>
+				<br />
+				<%= f.submit 'Сохранить', :class => 'butt' %>
+			</div>
+			<a style = "cursor: pointer;" name = "form" onclick = "replace_block(this)" title = "Редактировать список уведомлений" class = 'b_link'>Редактировать</a>
+		</div>
+		<% end %>
+        <br />
+    </div>
+</div>
+					

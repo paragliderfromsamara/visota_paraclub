@@ -1,33 +1,46 @@
 <p class = 'notice'><%= notice %></p>
-<%= form_for(@user) do |f| %>
-<% @antibot = @user.get_default_antibot_image %>
-<input type = 'hidden' name = abi[name] value = '<%= @antibot[:name] %>' >
-<% user_errors %>
-	<h2>Основные данные</h2>
-	<% if user_type == 'admin' or user_type == 'super_admin' %>
-		<div class = 'field'>
-			<%= f.label :user_group_id, 'Группа' %>
-			<%= my_collection_select(@user.user_groups, 'user_group_id', 'user', {}, '' ) %>
-		</div>
-	<% end %>
-	<div class = 'field'>
-			<%= f.label :name, 'Ник' %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
-			<%= f.text_field :name, :class => 't_field' %>
-	</div>
-	<div class = 'field'>
-		<%= f.label "Пароль" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
-		<%= f.password_field :password, :title => "От 6 до 40 знаков", :class => 't_field' %> 
-	</div>
-	<div class = 'field'>
-		<%= f.label "Подтверждение пароля" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
-		<%= f.password_field :password_confirmation, :title => "От 6 до 40 знаков", :class => 't_field' %>
-	</div>
-	<div class = 'field'>
-		<img src="/files/mail.png" valign = 'middle' > <%= f.label "E-mail" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
-		<%= f.text_field :email, :class => 't_field' %>
-	</div>
-
-<h2>Дополнительная информация</h2>
+<div class = 'cBoxSplitter'>
+     <h3>Основные данные</h3>
+</div>
+<div class = 'c_box odd'>
+    <br />
+    <div class = 'central_field' id = 'm_1000wh'>
+        <%= form_for(@user) do |f| %>
+        <% @antibot = @user.get_default_antibot_image %>
+        <input type = 'hidden' name = abi[name] value = '<%= @antibot[:name] %>' >
+        <% user_errors %>
+	   
+	    <% if user_type == 'admin' or user_type == 'super_admin' %>
+	        <div class = 'field'>
+	            <%= f.label :user_group_id, 'Группа' %>
+	            <%= my_collection_select(@user.user_groups, 'user_group_id', 'user', {}, '' ) %>
+	        </div>
+	        <% end %>
+	        <div class = 'field'>
+	            <%= f.label :name, 'Ник' %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
+                <%= f.text_field :name, :class => 't_field' %>
+            </div>
+	        <div class = 'field'>
+	            <%= f.label "Пароль" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
+	            <%= f.password_field :password, :title => "От 6 до 40 знаков", :class => 't_field' %> 
+	        </div>
+	        <div class = 'field'>
+	            <%= f.label "Подтверждение пароля" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
+	            <%= f.password_field :password_confirmation, :title => "От 6 до 40 знаков", :class => 't_field' %>
+	        </div>
+	        <div class = 'field'>
+		        <img src="/files/mail.png" valign = 'middle' > <%= f.label "E-mail" %><span title = "Поля обязательные для заполнения" style = "color: red;">*</span><br />
+	            <%= f.text_field :email, :class => 't_field' %>
+	        </div>
+            <br />
+      </div>
+</div>
+<div class = 'cBoxSplitter'>
+     <h3>Дополнительная информация</h3>
+</div>
+<div class = 'c_box even'>
+    <br />
+    <div class = 'central_field' id = 'm_1000wh'>
 
 	<div class = 'field'>
 		<%= f.label :full_name, 'Полное имя' %><br />
@@ -49,8 +62,14 @@
 		<%= f.label :inform, 'О себе' %><br /> 
 		<%= f.text_area :inform, :rows => '10', :cols => '60', :class => 't_area' %>
 	</div>
+    </div>
+    <br />
+</div>
+<div class = 'c_box odd'>
+<div class = 'central_field' id = 'm_1000wh'>
 <br />
-<p class = 'string'>Введите текст отображенный на картинке</p>
+<p class = 'istring'>Введите текст отображенный на картинке</p>
+<br />
 <img src = '/antibot_images/<%= @antibot[:name] %>.png' width = '150px'><br />
 <input type = 'text' name = abi[value] class = "t_field"  >
 <br />
@@ -59,5 +78,6 @@
 <br />
 <br />
 <br />
-
+</div>
+</div>
 <% end %>

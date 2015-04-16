@@ -34,7 +34,7 @@ module ArticlesHelper
 				  "
 		p = {
 				:tContent => html, 
-				:idLvl_1 => "b_middle",
+				:idLvl_2 => "b_middle",
 				:parity => 0
 			}
 		return c_box_block(p).html_safe

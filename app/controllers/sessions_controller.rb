@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-	 @title = @header = 'Вход на сайт'
+	 @title = 'Вход на сайт'
   end
 
   def create

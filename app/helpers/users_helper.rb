@@ -83,9 +83,12 @@ end
 def show_path_buttons
 	[
 		{:name => 'К списку пилотов', :access => true, :type => 'follow', :link => '/pilots'},
-		{:name => 'Изменить профиль', :access =>  userCanEditUserCard?(@user), :type => 'edit', :link => edit_user_path(:id => @user.id), :id => 'change_password'},
-		{:name => 'Уведомления', :title => "Уведомления на почтовый ящик", :access => userCanEditUserCard?(@user), :type => 'bing', :link => edit_user_path(:id => @user.id, :tab => 'notification_upd'), :id => 'change_notification'}
-	]	
+		{:name => 'Изменить общую информацию', :access =>  userCanEditUserCard?(@user), :type => 'ucard', :link => edit_user_path(:id => @user.id), :id => 'change_password'},
+		{:name => 'Уведомления', :title => "Уведомления на почтовый ящик", :access => userCanEditUserCard?(@user), :type => 'bing', :link => edit_user_path(:id => @user.id, :tab => 'notification_upd'), :id => 'change_notification'},
+		{:name => 'Изменить E-mail', :title => "Изменить адрес электронной почты", :access => userCanEditUserCard?(@user), :type => 'mail', :link => edit_user_path(:id => @user.id, :tab => 'email_upd'), :id => 'change_email'},
+    {:name => 'Изменить пароль', :access => userCanEditUserCard?(@user), :type => 'key', :link => edit_user_path(:id => @user.id, :tab => 'password_upd'), :id => 'change_password'}
+	
+  ]	
 end
 def last_user_videos(i)
   videos = @user.videos.order("created_at DESC").limit(3)
@@ -105,14 +108,14 @@ end
 def edit_path_buttons
 	
 	buttons = [
-					{:name => 'К профилю', :access => true, :type => 'b_grey', :link => user_path(@user)},
-					{:name => 'Изменить пароль', :access => userCanEditUserCard?(@user), :type => 'b_green', :link => edit_user_path(:id => @user.id, :tab => 'password_upd'), :id => 'change_password'},
-					{:name => 'Изменить E-mail', :title => "Изменить адрес электронной почты", :access => userCanEditUserCard?(@user), :type => 'b_green', :link => edit_user_path(:id => @user.id, :tab => 'email_upd'), :id => 'change_email'},
-					{:name => 'Изменить информацию', :title => "Изменить контактные данные, фото, аватар", :access => userCanEditUserCard?(@user), :type => 'b_green', :link => edit_user_path(:id => @user.id, :tab => 'data_upd'), :id => 'change_data'},
-					{:name => 'Уведомления', :title => "Уведомления на почтовый ящик", :access => userCanEditUserCard?(@user), :type => 'b_green', :link => edit_user_path(:id => @user.id, :tab => 'notification_upd'), :id => 'change_notification'}
+					{:name => 'К профилю', :access => true, :type => 'follow', :link => user_path(@user)},
+					{:name => 'Изменить пароль', :access => userCanEditUserCard?(@user), :type => 'key', :link => edit_user_path(:id => @user.id, :tab => 'password_upd'), :id => 'change_password'},
+					{:name => 'Изменить E-mail', :title => "Изменить адрес электронной почты", :access => userCanEditUserCard?(@user), :type => 'mail', :link => edit_user_path(:id => @user.id, :tab => 'email_upd'), :id => 'change_email'},
+					{:name => 'Изменить информацию', :title => "Изменить контактные данные, фото, аватар", :access => userCanEditUserCard?(@user), :type => 'ucard', :link => edit_user_path(:id => @user.id, :tab => 'data_upd'), :id => 'change_data'},
+					{:name => 'Уведомления', :title => "Уведомления на почтовый ящик", :access => userCanEditUserCard?(@user), :type => 'bing', :link => edit_user_path(:id => @user.id, :tab => 'notification_upd'), :id => 'change_notification'}
 				]
 	buttons.each do |button|
-		button[:selected] = true if (params[:tab] == nil or params[:tab] == '' or params[:tab] == 'data_upd' and button[:name] == 'Изменить информацию') || (params[:tab] == 'password_upd' and button[:name] == 'Изменить пароль') || (params[:tab] == 'email_upd' and button[:name] == 'Изменить E-mail') || (params[:tab] == 'notification_upd' and button[:name] == 'Уведомления') 
+		button[:access] = false if (params[:tab] == nil or params[:tab] == '' or params[:tab] == 'data_upd' and button[:name] == 'Изменить информацию') || (params[:tab] == 'password_upd' and button[:name] == 'Изменить пароль') || (params[:tab] == 'email_upd' and button[:name] == 'Изменить E-mail') || (params[:tab] == 'notification_upd' and button[:name] == 'Уведомления') 
 	end
 	return buttons
 end
