@@ -2,15 +2,19 @@
 	<%= users_paths_buttons.html_safe %>
 	<%= will_paginate @users %>
 </div>
-<div class = 'central_field' id = 'b_wrapper'>
-
-
+<div class = 'central_field' id = 'b_wrapper' style='min-height: 400px;'>
 	<% if @users != [] %>
+        <%i=0%>
 		<% @users.each do |user| %>
-			<%= user_index_list(user) %>
+			<%= user_index_list(user, i) %>
+            <%i+=1%>
 		<% end %>
 	<% else %>
-		<p class = 'string'>Нет ни одного пользователя в данной категории</p>
+        <div class = 'central_field' id = 'm_1000wh'>
+            <br />
+            <br />
+            <p class = 'istring norm'>Нет ни одного пользователя в данной категории</p>
+        </div>
 	<% end %>
 </div>
 <br />

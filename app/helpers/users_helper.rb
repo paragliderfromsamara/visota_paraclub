@@ -46,26 +46,27 @@ def user_errors
 	end
 end
 #Отображение пользователя в списке пользователей
-def user_index_list(user)
-	("
-	<div class = 'c_box'>
-		<div id = 'b_middle'>
-			<table>
-				<tr>
-					<td style = 'width: 100px;' align = 'center' valign = 'top'>
-							#{image_tag(user.alter_avatar, :class => 'ava')}
-					</td>
-					<td align = 'left' valign = 'top'>
-						<div style = 'padding-left: 15px;'>
-							<p>#{link_to user.visible_name(user_type), user, :class => 'b_link_bold'}</p>
-							<p class = 'istring norm'>#{user.group_name}</p>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	").html_safe
+def user_index_list(user, i)
+	html = "
+      			<table style = 'width: 100%;'>
+      				<tr>
+      					<td style = 'width: 100px;' align = 'center' valign = 'top'>
+      							#{image_tag(user.alter_avatar, :class => 'ava')}
+      					</td>
+      					<td align = 'left' valign = 'top'>
+      						<div style = 'padding-left: 15px;'>
+      							<p>#{link_to user.visible_name(user_type), user, :class => 'b_link_bold'}</p>
+      							<p class = 'istring norm'>#{user.group_name}</p>
+      						</div>
+      					</td>
+      				</tr>
+      			</table>"
+        	p = {
+        			:tContent => html, 
+        			:idLvl_2 => 'b_middle',
+              :parity => i
+        		}
+            return c_box_block(p).html_safe
 end
 
 def user_contacts(user)

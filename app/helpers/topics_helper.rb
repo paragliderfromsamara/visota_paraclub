@@ -7,8 +7,8 @@ module TopicsHelper
 		 {:name => 'Редактировать', :access => is_super_admin?, :type => 'edit', :link => "#{edit_topic_path(topic)}", :id => 'editTopic'}
 		]
 	end
-	def admin_index_topic_buttons
-		"#{control_buttons([{:name => 'Новый раздел', :access => is_super_admin?, :type => 'add', :link => "#{new_topic_path}", :id => 'newTopic'}])}"
+	def top_index_topic_buttons
+		"#{control_buttons([{:name => "Опросы", :access => true, :type => 'follow', :link => votes_path}, {:name => 'Новый раздел', :access => is_super_admin?, :type => 'add', :link => "#{new_topic_path}", :id => 'newTopic'}])}"
 	end
 	def show_topic_buttons(topic)
 		[

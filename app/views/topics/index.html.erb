@@ -1,7 +1,8 @@
-<div class = 'central_field' id = 'm_1000'>
-<%= buttons_in_line(visota_life_panel).html_safe %>
+<div class = 'c_box'>
+    <div class = 'central_field' style = 'width: 90%; z-index: 15;'>
+        <%= top_index_topic_buttons.html_safe %>
+    </div>
 </div>
-<%= "<div class = 'c_box'><div class = 'central_field' style = 'width: 90%; z-index: 15;'>#{admin_index_topic_buttons}</div></div>".html_safe if is_super_admin? %>
 <% @topics.each do |topic| %>
 	<div class = 'c_box'>
 				<div class = 'central_field' style = 'width: 90%; z-index: 15;'>
