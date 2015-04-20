@@ -1,13 +1,26 @@
-<%= add_new_event %>
-<div class = 'inline_c1'>
-	<div class = 'mono_c'>
-		<div class = "will_paginate">
-			<%= will_paginate %>
-		</div>
-		<%= event_index_blocks.html_safe %>
-		<div class = "will_paginate">
-			<%= will_paginate %>
-		</div>
-	</div>
-
+<div class = 'central_field' id = 'm_1000'>
+	<%= will_paginate @event %>
 </div>
+<div id = "b_wrapper">
+    <% if userCanCreateEvent? %>
+        <div class = 'c_box'>
+            <div class = 'central_field' id = 'm_1000wh'>
+                <%= add_new_event %>
+            </div>
+        </div>
+    <%end%>
+<% if @events != [] %>
+    <% i = 0 %>
+    <% @events.each do |event| %>
+        <%= event_index_item(event, i).html_safe %>
+        <%i+=1%>
+    <% end %>
+<% else %>
+    
+<% end %>
+</div>
+<br />
+<div class = 'central_field' id = 'm_1000'>
+	<%= will_paginate @event %>
+</div>
+

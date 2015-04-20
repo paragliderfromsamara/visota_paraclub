@@ -42,6 +42,18 @@ module GrantsHelper
 		end
 	end
 #votes end
+#events 
+def userCanCreateEvent?
+  return true if is_admin? || user_type == 'manager'
+  return false
+end
+def userCanEditEvent?(event)
+  if event != nil
+   return true if is_admin? || user_type == 'manager'
+  end
+  return false
+end
+#events end
 #photos_part
 	def userCanSeePhoto?(photo)
 		f = false

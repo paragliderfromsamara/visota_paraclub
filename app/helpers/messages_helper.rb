@@ -58,9 +58,6 @@ module MessagesHelper
 							#{message_user_row(message)}
 							<br />
 								#{author_string(message)}
-							
-							<br /> #{message.photos.count} Статус #{message.status_id}
-							
 							#{("<br />#{link_to 'Редактировать фото', "/edit_photos?e=msg&e_id=#{message.id}", :class => 'b_link'}") if message.user == current_user and message.photos != []}
 						</td>
 						<td>

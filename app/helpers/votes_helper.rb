@@ -139,10 +139,18 @@ module VotesHelper
 	def vote_errors 
 		@content_error = "" 
 		@content_f_class = "norm"
+    @vote_values_error = ""
+    @vote_values_f_class = "norm"
 		if @vote.errors[:content] != [] and @vote.errors[:content] != nil
 			@content_f_color = "err"
 			@vote.errors[:content].each do |err|
 				@content_error += "#{err}<br />"
+			end
+		end
+		if @vote.errors[:added_vote_values] != [] and @vote.errors[:added_vote_values] != nil
+			@vote_values_f_color = "err"
+			@vote.errors[:added_vote_values].each do |err|
+				@vote_values_error += "#{err}<br />"
 			end
 		end
 	end

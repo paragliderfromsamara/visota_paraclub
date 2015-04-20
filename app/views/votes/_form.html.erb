@@ -25,13 +25,13 @@
 				</p>
 			</div>
 			<br />
-			<%= f.fields_for :vote_values do |v| %>
+			<%= f.fields_for :added_vote_values do |v| %>
 				<%= v.label :value, 'Варианты' %><br />
 				<table id = 'vote_values_table'>
 					
 						<% if params[:vote] != nil and params[:vote] != []  %>
 							<% i = 0 %>
-							<% params[:vote][:vote_values].sort{|a,b| a<=>b}.each do |val| %>
+							<% params[:vote][:added_vote_values].sort{|a,b| a<=>b}.each do |val| %>
 								<tbody id = "vote_value_item" class = 'vote_value_items'>
 								<tr>
 									<td>
@@ -65,6 +65,13 @@
 							</tbody>
 						<% end %>
 				</table>
+    			<div>
+    				<p class = 'istring <%= @vote_values_f_color.html_safe if @vote_values_f_color != nil %>' id = 'cLength'>
+    					<span id = 'txtL'></span>
+    					<span id = 'txtErr'></span>
+    					<span id = 'txtErrSrv'><%= @vote_values_error.html_safe if @vote_values_error != nil%></span>
+    				</p>
+    			</div>
 				<%= control_buttons([{:name=> 'Добавить вариант', :id => 'addVoteValue', :access => true, :type => 'add'}]).html_safe %>
 				
 			<% end %>

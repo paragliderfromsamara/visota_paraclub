@@ -280,7 +280,7 @@ function initVoteForm(formName)
 		els = f.formElement.find('.vote_value_items');
 		l = els.length;
 		f.formElement.find('.vote_value_items').each(function(i, e){
-																	$(e).find(":text").attr('name', 'vote[vote_values]['+i+']').focus();
+																	$(e).find(":text").attr('name', 'vote[added_vote_values]['+i+']').focus();
 																	if (l>2)
 																	{
 																		$(e).find("#voteValDelBut").html("<a id = 'delItem' class = 'b_link pointer'>Удалить</a>");

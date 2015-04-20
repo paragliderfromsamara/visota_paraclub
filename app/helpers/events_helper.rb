@@ -1,34 +1,34 @@
 module EventsHelper
-	def event_index_item(event) #Миниатюра в списке новостей  
-			"
-				<div class = 'bl_2'>
-					<div class = 'bl_2_h'>
-						<p>#{event.title}</p>
-					</div>
-					<div class = 'bl_1_body'>
-						<div class = 'central_field' style = 'width: 98%;'>
+	def event_index_item(event, i) #Миниатюра в списке новостей  
+    html = "<br />
+						<h4>#{event.title}</h4>
+            <br />
 							<table style = 'width: 99%;'>
 								<tr>
 									#{"<td>#{event.alter_photo('thumb')}</td>" if event.alter_photo('thumb') != nil}
-									<td valign = 'top' align = 'left' style = 'min-width: 700px;'>#{truncate(event.alter_content, :length => 500)}</td>
+									<td valign = 'top' align = 'left' style = 'min-width: 700px;'>
+                    <span class = 'mText' id = 'content'>
+                      <p>#{truncate(event.alter_content, :length => 500)}</p>
+                    </span>
+                  </td>
 								</tr>
 							</table>
-						</div>
-					</div>
-					<div class = 'bl_1_bottom'>
-						#{buttons_in_line(event_index_buttons(event))}
-					</div>
-				</div>
+						#{control_buttons(event_index_buttons(event))}
 				"
-			
+    		p = {
+    				:tContent => html, 
+    				:idLvl_2 => "m_1000wh", 
+    				:parity => i
+    			}
+          return c_box_block(p)
 	end
 	
 	def event_index_blocks #Построение списка новостей
 		result = 'Нет ни одной новости'
 		if @events != [] and @events != nil
 			result = ''
-			@events.each do |event|
-				result += event_index_item(event)
+		 @events.each do |event|
+				#result += event_index_item(event)
 			end
 		end
 		return result
@@ -45,12 +45,12 @@ module EventsHelper
 	
 	def event_manage_buttons(event)
 		[
-			{:name => 'Изменить', :access => ['super_admin', 'admin', 'manager'], :type => 'b_blue', :link => edit_event_path(event)},
-			{:name => 'Удалить', :access => ['super_admin', 'admin', 'manager'], :type => 'b_blue', :link => event_path(event), :rel => 'nofollow', :data_confirm => 'Вы уверены что хотите удалить новость???', :data_method => 'delete'}
+			{:name => 'Изменить', :access => userCanEditEvent?(event), :type => 'edit', :link => edit_event_path(event)},
+			{:name => 'Удалить', :access => userCanEditEvent?(event), :type => 'del', :link => event_path(event), :rel => 'nofollow', :data_confirm => 'Вы уверены что хотите удалить новость???', :data_method => 'delete'}
 		]
 	end
 	def event_index_buttons(event)
-		[{:name => 'Перейти', :access => ['all'], :type => 'b_green', :link => event.link_to}] + event_manage_buttons(event) 
+		[{:name => 'Перейти', :access => true, :type => 'follow', :link => event.link_to}] + event_manage_buttons(event) 
 	end
 	def event_show_buttons
 		val = [{:name => 'К списку новостей', :access => ['all'], :type => 'b_green', :link => events_path}] + event_manage_buttons(@event)
@@ -58,7 +58,7 @@ module EventsHelper
 		return val
 	end
 	def add_new_event
-		buttons_in_line([{:name => 'Добавить новость', :access => ['super_admin', 'admin', 'manager'], :type => 'b_green', :link => new_event_path}]).html_safe
+		control_buttons([{:name => 'Добавить новость', :access => userCanCreateEvent?, :type => 'add', :link => new_event_path}]).html_safe
 	end
 	
 	def event_show_photos

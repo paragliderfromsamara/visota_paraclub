@@ -71,6 +71,12 @@ require 'iconv' #для парсера
 					   :drop_items => 'none'
 					  },
 					  {
+					   :name => 'Новости', 
+					   :link => "/events", 
+					   :title => "Новости",
+					   :drop_items => 'none'
+					  },
+					  {
 					   :name => 'Фото', 
 					   :link => "/photo_albums", 
 					   :title => "Фотоальбомы",
