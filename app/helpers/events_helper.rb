@@ -36,10 +36,24 @@ module EventsHelper
 	
 	def event_show_block
 		"
-			<h2>#{@event.title}</h2>
-			<hr />
-			<span class = 'article_content'>#{@event.content_html}</span>
-			#{event_show_photos}
+    <br />
+    <table style = 'width:100%;'>
+      <tr>
+        <td  align = 'left' >
+          	<h1>#{@event.title}</h1>
+        </td>
+        <td align = 'right'>
+          <span class = 'istring norm medium-opacity'>#{my_time(@event.created_at)}</span>
+        </td>
+      </tr>
+      <tr> 
+        <td align = 'left' colspan = '2'>
+          <span class = 'article_content'>#{@event.content_html}</span>
+          #{event_show_photos}
+        </td>
+      </tr>
+    </table>
+    <br /><br />
 		"
 	end
 	
@@ -53,8 +67,8 @@ module EventsHelper
 		[{:name => 'Перейти', :access => true, :type => 'follow', :link => event.link_to}] + event_manage_buttons(event) 
 	end
 	def event_show_buttons
-		val = [{:name => 'К списку новостей', :access => ['all'], :type => 'b_green', :link => events_path}] + event_manage_buttons(@event)
-		val[val.length] = {:name => 'Редактировать фотографии', :access => ['super_admin', 'admin', 'manager'], :type => 'b_blue', :link => "/edit_photos?e=ev&e_id=#{@event.id}"} if @event.photos != []
+		val = [{:name => 'К списку новостей', :access => true, :type => 'follow', :link => events_path}] + event_manage_buttons(@event)
+		val[val.length] = {:name => 'Редактировать фотографии', :access => userCanEditEvent?(@event), :type => 'edit', :link => "/edit_photos?e=ev&e_id=#{@event.id}"} if @event.photos != []
 		return val
 	end
 	def add_new_event

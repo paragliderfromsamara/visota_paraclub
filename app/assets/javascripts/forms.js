@@ -257,7 +257,25 @@ function initAlbumForm(id, formName)
 							}else{f.formElement.find('.butt').attr('disabled', 'true');};
 						  }, 300);
 }
-
+function initEventForm(id, formName)
+{
+	var f;
+	f = new myForm('event', id, formName);
+	f.contentField = f.formElement.find('#event_content');
+	f.nameField = f.formElement.find('#event_title');
+	f.contentFieldMaxLength = 1000;
+	f.nameFieldMaxLength = 150;
+	f.nameFieldMinLength = 5;
+    f.tEditor = new textEditor(f);
+     f.initPanel();
+	f.shortNameErr = 'Заголовок не должен быть короче ' + f.nameFieldMinLength + ' символов';
+	f.longNameErr = 'Длина заголовка превышена на ';
+	f.imagesMaxLength = 20;
+	f.imagesMinLength = 0;
+	f.imagesMaxLengthErr = 'Максимально допустимое количество фотографий новости превышено на ';
+	f.photosUploader();
+	f.getPhsToForm();
+}
 function initVoteForm(formName)
 {
 	f = new myForm('photo_album', null, formName);

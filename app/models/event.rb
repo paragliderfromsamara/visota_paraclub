@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   require 'will_paginate'
   
   auto_html_for :content do
+	html_escape
 	my_youtube_msg(:width => 480, :height => 360, :span => true)
 	my_vimeo(:width => 480, :height => 360, :span => true)
 	vk_video_msg(:width => 480, :height => 360, :span => true)
@@ -15,7 +16,10 @@ class Event < ActiveRecord::Base
     link :target => "_blank", :rel => "nofollow", :class => "b_link"
 	my_photo_hash
 	user_hash
-    simple_format
+	theme_hash
+	my_quotes
+	fNum
+  simple_format
   end
   
   after_save :check_photos_in_content

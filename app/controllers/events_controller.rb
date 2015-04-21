@@ -31,6 +31,7 @@ class EventsController < ApplicationController
 	if user_type == 'admin' || user_type == 'super_admin' || user_type == 'manager'
 		@event = Event.new
 		@title = 'Добавление новости'
+    @add_functions = "initEventForm(#{30}, '#new_event');"
 		respond_to do |format|
 		  format.html # new.html.erb
 		  format.json { render :json => @event }
@@ -45,6 +46,7 @@ class EventsController < ApplicationController
     @event = Event.find_by_id(params[:id])
 	if userCanEditEvent?(@event)
 		@title = 'Изменение новости'
+    @add_functions = "initEventForm(#{@event.id}, '.edit_event');"
 	else
 		redirect_to '/404'
 	end
