@@ -1,1 +1,12 @@
+<%= navigation_string.html_safe %>
+<br />
+<div class = 'c_box'>
+    <div class = 'central_field' id = 'm_1000wh'>
+        <%= control_buttons([{:name => 'Назад к новости', :access => true, :type => 'follow', :link => event_path(@event)}]).html_safe %>
+    </div>
+</div>
 <%= render 'form' %>
+<br />
+<%= navigation_string.html_safe %>
+<br />
+<br />

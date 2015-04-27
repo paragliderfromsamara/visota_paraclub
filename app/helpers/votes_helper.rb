@@ -2,21 +2,11 @@ module VotesHelper
 	def vote_body(vote)
 		"<table style = 'width: 100%;'>
 			<tr>
-				<td valign = 'middle' align = 'left' style = 'height:50px;' colspan = '2'>
-					<h1>#{vote.title}</h1>
-				</td>
-			</tr>
-			<tr>
 				<td valign = 'middle' align = 'left'  style='height: 45px;'>
-					#{voteInformation(vote)}
+					<span class = 'istring_m norm'>Автор опроса: </span>#{link_to vote.user.name, vote.user, :class => 'b_link_i'}	#{voteInformation(vote)}
 				</td>
 				<td valign = 'middle' align = 'right' style='height: 45px;'>
 					<p class = 'istring_m norm'>Голосование #{'было' if vote_completed?(vote)} активно с #{my_time(vote.start_date)} по #{my_time(vote.end_date)}</p>
-				</td>
-			</tr>
-			<tr>
-				<td valign = 'middle' align = 'left' colspan = '2'>
-					<span class = 'istring_m norm'>Автор опроса: </span>#{link_to vote.user.name, vote.user, :class => 'b_link_i'}
 				</td>
 			</tr>
 			<tbody id = 'middle'>
@@ -32,13 +22,6 @@ module VotesHelper
 				</td>
 				</tr>
 			</tbody>
-			<tr>
-				<td colspan = '2'>
-					<div style = 'height: 30px;'>
-						#{vote_owner_buttons(vote)}
-					</div><br />
-				</td>
-			</tr>
 		</table>		
 		"
 	end
@@ -57,9 +40,12 @@ module VotesHelper
 		''
 	end
 	
-	def vote_owner_buttons(vote)
-		''
-	end
+	def vote_show_buttons
+		b = []
+    b += [{:name => "К списку опросов", :access => true, :type => 'follow', :link => votes_path}]
+    b += [{:name => "Удалить опрос", :access => userCanEditVote?(@vote), :type => 'del', :link => vote_path(@vote), :data_method => 'delete', :data_confirm => 'Вы уверены, что хотите удалить данное голосование?', :rel => 'nofollow'}]
+	  return control_buttons(b)
+  end
 	
 	def vote_values_table(vote)
 		v = "<span class = 'istring_m norm'>Нет ни одного варианта ответа...</span>"
@@ -97,7 +83,7 @@ module VotesHelper
 	
 	def index_votes_buttons
 		[
-		 {:name => "Добавить опрос", :access => !is_not_authorized?, :type => 'add', :link => "#{new_vote_path}", :id => 'newVote'}, 
+		 {:name => "Добавить опрос", :access => !is_not_authorized?, :type => 'add', :link => "#{new_vote_path}", :id => 'newVote'} 
 		]
 	end
 	

@@ -23,6 +23,7 @@
 				<th>
 					Дата завершения голосования
 				</th>
+                <%if is_admin?%><th></th><%end%>
 			</tr>
 			<% @active_votes.each do |vote| %>
 				<tbody class = 't_link' link_to = '<%= vote_path(vote) %>' >
@@ -39,6 +40,9 @@
 					<td>
 						<%= my_time(vote.end_date) %>
 					</td>
+                    <% if is_admin? %>
+                       <td> <%= link_to "Удалить", vote, :method => 'delete', :class => 'b_link', :confirm => 'Вы уверены, что хотите удалить данное голосование?' %></td>
+                    <%end%>
 				</tr>
 				</tbody>
 			<% end %>
@@ -72,6 +76,7 @@
 				<th>
 					Дата завершения голосования
 				</th>
+               <%if is_admin?%><th></th><%end%>
 			</tr>
 			<% @completed_votes.each do |vote| %>
 				<tbody class = 't_link' link_to = '<%= vote_path(vote) %>' >
@@ -88,6 +93,9 @@
 					<td>
 						<%= my_time(vote.end_date) %>
 					</td>
+                    <% if is_admin? %>
+                       <td> <%= link_to "Удалить", vote, :method => 'delete', :class => 'b_link', :confirm => 'Вы уверены, что хотите удалить данное голосование?' %></td>
+                    <%end%>
 				</tr>
 				</tbody>
 			<% end %>

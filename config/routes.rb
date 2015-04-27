@@ -4,7 +4,10 @@ VisotaParaclubRu::Application.routes.draw do
   resources :votes
   resources :events
 
-
+  #events 
+  post "events/upload_photos"
+  match '/events/:id/upload_photos', :to => 'events#upload_photos' #загрузка с помощью dropzone.js и собственную функцию
+  #events end
   #admin_tools
 	get "admin_tools/deleted_albums"   #удалённые альбомы
 	get "admin_tools/deleted_themes"   #удалённые темы

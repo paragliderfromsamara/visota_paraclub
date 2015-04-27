@@ -56,7 +56,7 @@ class Theme < ActiveRecord::Base
 				   :length => { :maximum => 100, :message => "Заголовок темы должен быть длиннее 100 символов"},
 				   #:on => :create
 				   :if => :is_not_draft?
- validates :content, :presence => {:message => "Тема поле \"Содержимое\" не должно быть пустым"},
+ validates :content, :presence => {:message => "Поле \"Содержимое\" не должно быть пустым"},
 				     :length => { :maximum => 15000, :message => "Содержимое темы не должно быть длиннее 15000 символов"},
 				     #:on => :create
 				     :if => :has_attachments_and_photos?

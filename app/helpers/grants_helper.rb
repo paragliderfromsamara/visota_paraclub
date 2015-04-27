@@ -9,7 +9,13 @@ module GrantsHelper
 		user_type == 'super_admin'
 	end
 #votes
-	def vote_completed?(vote)
+def userCanEditVote?(vote)
+  if vote != nil
+      return true if vote.user == current_user || is_admin?
+  end
+  return false
+end
+  def vote_completed?(vote)
 		vote.end_date < Time.now
 	end
 	def userCanGiveVoice?(vote)
@@ -53,6 +59,12 @@ def userCanEditEvent?(event)
   end
   return false
 end
+def userCanSeeEvent?(event)
+  if event != nil
+    return true if event.status_id == 2 || (event.status_id != 2 and (is_admin? || user_type == 'manager')) 
+  end
+  return false
+end
 #events end
 #photos_part
 	def userCanSeePhoto?(photo)
@@ -66,6 +78,9 @@ end
 				f = userCanSeeAlbum?(photo.photo_album)
 			elsif photo.article != nil
 				f = isEntityOwner?(photo.article)
+			elsif photo.event != nil
+      
+				f = userCanSeeEvent?(photo.event)
 			end
 		end
 		return f

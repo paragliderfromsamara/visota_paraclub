@@ -6,31 +6,26 @@
         </h1>
         <br />
         <%= form_for(@event) do |f| %>
-          <% if @event.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-              <ul>
-              <% @event.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
-          <div class="field">
-            <%= f.label :post_date, 'Дата размещения' %><br />
-            <%= f.datetime_select :post_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %>
-          </div>
-            <div class="field">
-            <%= f.label :display_area_id, 'Зоны видимости' %><br />
-            <%= my_collection_select(@event.display_area_list, 'display_area_id', 'event', @event.get_display_area_list_item, '') %>
-          </div>
-          <div class="field">
-            <%= f.label :status_id, 'Статус новости' %><br />
-            <%= my_collection_select(@event.statuses_list, 'status_id', 'event', @event.get_status_item, '') %>
-          </div>
+         <% if user_type == 'manager' %>
+             <%= f.hidden_field :post_date, :value => Time.now %>
+             <%= f.hidden_field :status_id, :value => 2 %>
+         <%elsif is_admin?%>
+             <div class="field">
+               <%= f.label :post_date, 'Дата размещения' %><br />
+               <%= f.datetime_select :post_date, :start_year => 2000, :end_year => Date.today.year, :order => [:day, :month, :year], :use_month_names => ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] %>
+             </div>
+             <div class="field">
+               <%= f.label :status_id, 'Статус новости' %><br />
+               <%= my_collection_select(@event.statuses_list, 'status_id', 'event', @event.get_status_item, '') %>
+             </div>
+         <%end%>
+
+          
           <div class="field">
             <%= f.label :title, 'Заголовок новости' %><br />
             <%= f.text_field :title, :size => '118', :class => 't_field', :autocomplete => 'off'%>
+			<div><p class = 'istring #{@name_f_color if @name_f_color != nil}' id = 'nLength'><span id = 'txtL'></span> <span class = 'err' id = 'txtMatchesErr'></span> <span id = 'txtErr'>#{@name_error if @name_error != nil}</span><span id = 'txtErrSrv'><%= @name_error if @name_error != nil %></span></p></div><br />									
+			<div style = 'position: relative; z-index: 1000; width: 100%;' id = 'likebleNames'></div><br />
           </div>
 
 		<table id = 'msg_table' style = 'width: 100%;'>
@@ -54,6 +49,10 @@
                         <div class="field">
                           <%= f.label :short_content, 'Краткое изложение новости' %><br />
                           <%= f.text_area :short_content, :cols => '120', :rows => '5', :class => 't_area' %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :display_area_id, 'Зоны видимости' %><br />
+                          <%= my_collection_select(@event.display_area_list, 'display_area_id', 'event', @event.get_display_area_list_item, '') %>
                         </div>
           <div class="actions">
             <%= f.submit 'Сохранить новость', :class => 'butt' %>

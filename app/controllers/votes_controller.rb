@@ -6,6 +6,7 @@ class VotesController < ApplicationController
 						{:name => 'Клубная жизнь', :link => '/visota_life'},
 						{:name => 'Опросы'}
 				  ]
+          @title = 'Опросы'
 	respond_to do |format|
 	  format.html # index.html.erb
       format.json { render :json => @votes }
@@ -14,6 +15,7 @@ class VotesController < ApplicationController
 
   def show
 	@vote = Vote.find(params[:id])
+  @title = @vote.name
 	@path_array = [
 						{:name => 'Клубная жизнь', :link => '/visota_life'},
 						{:name => 'Опросы', :link => votes_path},
@@ -76,5 +78,12 @@ class VotesController < ApplicationController
   end
 
   def destroy
+    vote = Vote.find_by_id(params[:id])
+    if userCanEditVote?(vote)
+      vote.destroy
+      redirect_to votes_path
+    else 
+      redirect_to '/404'
+    end
   end
 end

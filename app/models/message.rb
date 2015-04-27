@@ -133,9 +133,9 @@ class Message < ActiveRecord::Base
   end
   
   def set_as_delete #помечает сообщение как удалённое
-	self.update_attributes(:status_id => 3)
-	if photos != []
-		photos.each do |ph|
+	self.update_attribute(:status_id, 3)
+	if self.photos != []
+		self.photos.each do |ph|
 			ph.set_as_on_deleted_entity
 		end
 	end

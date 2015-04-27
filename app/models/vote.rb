@@ -9,8 +9,8 @@ class Vote < ActiveRecord::Base
  
   
   validates :content, :presence => {:message => "Поле 'Вопрос' не должно быть пустым"},
-				      :length => { :maximum => 500, :message => "Название не может быть длиннее 500-ти знаков"}
-  validates :added_vote_values, :length => { :minimum => 2, :message => "Вариантов ответа не может быть меньше 2-х..."}
+				      :length => { :maximum => 800, :message => "Название не может быть длиннее 500-ти знаков"}
+  #validates :added_vote_values, :length => { :minimum => 2, :message => "Вариантов ответа не может быть меньше 2-х..."}
   
 # validate :validation_vote_values
   

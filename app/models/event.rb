@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
 	my_vimeo(:width => 480, :height => 360, :span => true)
 	vk_video_msg(:width => 480, :height => 360, :span => true)
 	smiles
-    link :target => "_blank", :rel => "nofollow", :class => "b_link"
+  link :target => "_blank", :rel => "nofollow", :class => "b_link"
 	my_photo_hash
 	user_hash
 	theme_hash
@@ -23,12 +23,17 @@ class Event < ActiveRecord::Base
   end
   
   after_save :check_photos_in_content
-
+  #Проверка
+  validates :content, :presence => {:message => "Поле \"Текст новости\" не должно быть пустым"},
+ 				     :length => { :maximum => 15000, :message => "Текст новости не должен быть длиннее 15000 символов"}
+ 				     #:on => :create
+ 				     #:if => :has_attachments_and_photos? 
+  #end
 #Зоны видимости------------------------------------------------------------
   def display_area_list
 	[
+    {:value => 2, :name => 'Только в корне гостевой'},
 		{:value => 1, :name => 'Только главная страница'},
-		{:value => 2, :name => 'Только в корне гостевой'},
 		{:value => 3, :name => 'На главной странице и в корне гостевой'}
 	]
   end
@@ -43,7 +48,8 @@ class Event < ActiveRecord::Base
 #Статус новости------------------------------------------------------------
   def statuses_list
 	[
-		{:value => 1, :name => 'Не активна'},
+		{:value => 0, :name => 'Черновик'},
+    {:value => 1, :name => 'Не активна'},
 		{:value => 2, :name => 'Активна'}
 	]
   end
@@ -104,9 +110,9 @@ class Event < ActiveRecord::Base
 		if photos != []
 			photos.each do |ph|
 				if content.index("#Photo#{ph.id}") != nil and content.index("#Photo#{ph.id}") != -1
-					ph.update_attributes(:status_id => 2) if ph.status_id != 2
+					ph.set_as_hidden
 				else
-					ph.update_attributes(:status_id => 1) if ph.status_id == 2
+					ph.set_as_visible
 				end
 			end
 		end
@@ -118,4 +124,21 @@ class Event < ActiveRecord::Base
 		link = "/videos/#{video.id}" if video != nil
 		return link
 	end
+  
+  def clean #обязательно должна вызываться при обновлении сообщений
+  	if self.photos != []
+  		self.photos.each do |ph|
+  			ph.destroy
+  		end
+  	end					
+  end
+  def assign_entities_from_draft(draft)
+    if draft != nil
+      if draft.photos != []
+        draft.photos.each do |ph|
+    			ph.update_attributes(:event_id => self.id, :status_id => 1, :visibility_status_id => 1)
+        end
+      end
+    end
+  end
 end

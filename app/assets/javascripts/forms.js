@@ -264,26 +264,50 @@ function initEventForm(id, formName)
 	f.contentField = f.formElement.find('#event_content');
 	f.nameField = f.formElement.find('#event_title');
 	f.contentFieldMaxLength = 1000;
+    f.contentFieldMinLength = 20;
 	f.nameFieldMaxLength = 150;
 	f.nameFieldMinLength = 5;
     f.tEditor = new textEditor(f);
-     f.initPanel();
+    f.initPanel();
 	f.shortNameErr = 'Заголовок не должен быть короче ' + f.nameFieldMinLength + ' символов';
 	f.longNameErr = 'Длина заголовка превышена на ';
+	f.shortContentErr = 'Содержимое новости не должно быть короче ' + f.contentFieldMinLength + ' символов';
+	f.longContentErr = 'Длина содержимого новости превышена на ';
 	f.imagesMaxLength = 20;
 	f.imagesMinLength = 0;
 	f.imagesMaxLengthErr = 'Максимально допустимое количество фотографий новости превышено на ';
 	f.photosUploader();
 	f.getPhsToForm();
+	setInterval(function(){
+							var nFlag, cFlag;
+							nFlag = f.nameLengthCheck();
+							cFlag = f.contentLengthCheck(); 
+							if (nFlag && cFlag)
+							{
+								f.formElement.find('.butt').removeAttr('disabled');
+							}else{f.formElement.find('.butt').attr('disabled', 'true');};
+						  }, 300);
 }
 function initVoteForm(formName)
 {
 	f = new myForm('photo_album', null, formName);
 	f.contentField = f.formElement.find('#vote_content');
 	f.aButList = [0];
-	f.contentFieldMaxLength = 15000;
-	f.contentFieldMinLength = 100;
+	f.contentFieldMaxLength = 500;
+	f.contentFieldMinLength = 10;
 	updVoteValuesFields();
+	f.shortContentErr = 'Вопрос не должен быть короче ' + f.contentFieldMinLength + ' символов';
+	f.longContentErr = 'Длина вопроса превышена на ';
+	setInterval(function(){
+							var cFlag, qFlag;
+							cFlag = f.contentLengthCheck();
+                            qFlag = voteValuesCheck();
+							if (cFlag && qFlag)
+							{
+								f.formElement.find('.butt').removeAttr('disabled');
+							}else{f.formElement.find('.butt').attr('disabled', 'true');};
+						  }, 300);
+    
 	$('#addVoteValue').click(function(){
 										var e, c;
 										e = $("#vote_value_item").clone();
@@ -292,7 +316,42 @@ function initVoteForm(formName)
 										updVoteValuesFields();
 										bottomControl();
 									   });
-	function updVoteValuesFields()
+	
+    function voteValuesCheck()
+                                       {
+                                        var variants = new Array();
+                                        var uFlag = true;
+                                        var notEmptyCounter = 0;
+                                        var text1 = '';
+                                        var text2 = '';
+                                        var fail = '';
+                                   		f.formElement.find('.vote_value_items').each(function(i, e){
+                                   																	variants[variants.length] = $(e).find(":text").val();
+                                   																   });
+                                        for(var i=0; i<variants.length; i++)
+                                        {
+                                            text1 = $.trim(variants[i].toLowerCase());
+                                            if(text1 != ''){notEmptyCounter++;}
+                                            if((i < variants.length-1) && (uFlag == true) && (text1 != ''))
+                                            {
+                                                 for(var j=i+1; j<variants.length; j++)
+                                                     {
+                                                         text2 = $.trim(variants[j].toLowerCase());
+                                                         if (text2 != '')
+                                                         {
+                                                             if(text1 == text2){uFlag = false; break;}
+                                                         }
+                                                     } 
+                                            }
+                                        }
+                                        if (!uFlag){fail+='Варианты ответа должны быть уникальные...; ';}
+                                        if (notEmptyCounter<2){fail+='Должно быть как минимум два варианта ответа...;'; uFlag = false;}
+                                        $("#qLength").find("#txtErr").html(fail);
+                                        return uFlag;
+                                                                                            
+                 
+                                       }
+    function updVoteValuesFields()
 	{
 		var l, els;
 		els = f.formElement.find('.vote_value_items');
@@ -306,6 +365,8 @@ function initVoteForm(formName)
 																	}else $(e).find("#voteValDelBut").empty();
 																});
 	}
+    
+    
 	
 }
 function myForm(type, entityID, formName)
@@ -773,7 +834,7 @@ function changingTextarea(e){var v,cr,nr,r,c,dr,txt;r = $(e).attr('rows');c = $(
 	
 function addHashCodeToTextArea(e, id)
 {var t='',ta;
-	ta = $('#'+id).find('#message_content, #theme_content, #article_content');
+	ta = $('#'+id).find('#message_content, #theme_content, #article_content, #event_content');
 	t= $.trim(ta.val());
 	if (t!==''){t = t+'\n'}
 	ta.val(t+$(e).attr('hashCode'));

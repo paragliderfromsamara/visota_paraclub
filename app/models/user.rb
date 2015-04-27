@@ -191,6 +191,14 @@ mount_uploader :photo, UserPhotoUploader
 	end
 	return draft
   end
+  def event_draft 
+  	draft = Event.find_by_status_id(0)
+  	if draft == nil
+  		draft = Event.new(:status_id => 0)# if draft == nil 
+  		draft.save(:validate => false) #отключаем проверку
+  	end
+  	return draft
+  end
   #управление черновиками тем и сообщений end
   
   #Валидация пользователя

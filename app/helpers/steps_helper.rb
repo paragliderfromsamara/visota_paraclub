@@ -20,6 +20,7 @@ module StepsHelper
 			@curMenuItem = 'Материалы'
 			make_step
 		elsif controller.controller_name == 'events' #@page_params[:part_id] == 8 #events
+      @curMenuItem = 'Новости'
 		elsif controller.controller_name == 'themes' #@page_params[:part_id] == 9 #themes
 			@curMenuItem = 'Клубная жизнь'
 			make_signed_step

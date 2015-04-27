@@ -360,6 +360,10 @@ end
 				value = date.strftime("Сегодня в %H:%M")
 			elsif days_difference == 1 
 				value = date.strftime("Вчера в %H:%M")
+			elsif days_difference == -1 
+				value = date.strftime("Завтра в %H:%M")
+			elsif days_difference < -1 
+				value = "#{date.strftime("%d #{ru_month(date.month.to_i, 'rod_padej')}")}"
 			elsif days_difference > 1 
 				value = "#{date.strftime("%d #{ru_month(date.month.to_i, 'rod_padej')}")}"
 			end
