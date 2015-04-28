@@ -182,7 +182,7 @@ module MessagesHelper
 			else
 				ent = @formMessage
 			end
-			@add_functions = "initMessageForm(#{ent.id.to_s}, '#{formClass}', '#{type}');"
+			@add_functions = (@add_functions == nil)? "initMessageForm(#{ent.id.to_s}, '#{formClass}', '#{type}');":@add_functions+"initMessageForm(#{ent.id.to_s}, '#{formClass}', '#{type}');"
 			form = "<div style = 'display: #{display};' id = 'newMsgForm'>#{buildMsgForm(type)}</div>"
 			p = {:tContent => form}
 			return c_box_block(p)

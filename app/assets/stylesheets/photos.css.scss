@@ -18,7 +18,6 @@
 	#photoField
 	{
 		background-color: black;
-		height: 700px;
 		z-index: 5;
 		img {border-left: 1px solid #404040; border-right: 1px solid #404040;}
 		
@@ -56,7 +55,7 @@
 	}
 	#paginationLine
 	{
-		top: 7px;
+		padding-top: 5px;
 		height:100%;
 		width: 810px;
 		

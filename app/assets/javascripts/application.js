@@ -106,6 +106,7 @@
 	jQuery.each(fieldSelection, function(i) { jQuery.fn[i] = this; });
 	
 })();
+var allowArrows = true;
 function my_functions()
 	{
 		var enteredLi, leftLi; //для управления главным меню
@@ -702,7 +703,6 @@ function myPhotoPage()
 		}
 		if (fVisible==0){$(".ph-arr-left").css("visibility", "hidden");}else{$(".ph-arr-left").css("visibility", "visible")}
 		if (lVisible==(blC-1)){$(".ph-arr-right").css("visibility", "hidden")}else{$(".ph-arr-right").css("visibility", "visible")}
-		$("#test").text(fVisible + " " + lVisible + " " + blC);
 	}
 	$(".ph-arr-right").click(function(){
 											if ((fVisible+(maxVBlocks-1)) !== (blC-1)){fVisible++;updScrIndexes('right');updPhotoPaginate('upd');}
@@ -713,7 +713,27 @@ function myPhotoPage()
 	
 	//var
 }
-
+function setPhotoSizeByScreen(width, height)
+{
+   var wHeight =  $(window).height();
+   var pagHeight = $("#photoPagination").outerHeight(true);
+   var newHeight = wHeight-pagHeight;
+   $("#test").text(allowArrows);
+   $(document).keyup(
+       function(event){
+           if (allowArrows == true)
+           {
+               if (event.keyCode == 37) //previousPhoto
+               {
+                     goToLink($(".ph-big-prev").attr('link_to'));
+               }else if (event.keyCode == 39)  //nextPhoto
+               {
+                     goToLink($(".ph-big-next").attr('link_to'));
+               }
+           }});          
+   if (height > newHeight){$("#bPhoto").height(newHeight);}
+      
+}
 
 //photo_path end
 //vote_path

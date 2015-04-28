@@ -35,6 +35,7 @@ include MessagesHelper
 		@prev_photo = nil
 		@next_photo = nil
 		@return_to = photo_path(@photo)
+    @add_functions = "setPhotoSizeByScreen(#{@photo.widthAndHeight[:width]}, #{@photo.widthAndHeight[:height]});"
 		if @photo.photo_album != nil
 			@photos = @photo.photo_album.visible_photos
 			@album = @photo.photo_album

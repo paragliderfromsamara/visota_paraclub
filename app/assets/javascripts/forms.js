@@ -179,10 +179,10 @@ function initMessageForm(msg_id, formName, msgType)
 													f.contentField.val(f.curContentValue);
 													f.initPanel();
 													cleanAnswerBlks();
-													
+													allowArrows = false;
 													
 												}
-												else {f.curContentValue = f.contentField.val(); $('#newMsgForm').hide();}
+												else {f.curContentValue = f.contentField.val(); $('#newMsgForm').hide();allowArrows = true;}
 										   }
 							  );
 	function cleanAnswerBlks(m_id){
@@ -214,6 +214,7 @@ function initMessageForm(msg_id, formName, msgType)
 													f.photosUploader();
 													cleanAnswerBlks(msgToId);
 													updUploadedImageButtons(answBl.attr('id'));
+                                                    allowArrows = false;
 												}
 												else {
 														f.formElement.find('#message_message_id').remove();
@@ -222,6 +223,7 @@ function initMessageForm(msg_id, formName, msgType)
 														f.curContentValue = f.contentField.val();
 														//initListeners(currentVisibleForm);
 														$(answBl).hide().empty();
+                                                        allowArrows = true;
 													 }
 										  });
 }

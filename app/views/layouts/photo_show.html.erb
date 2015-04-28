@@ -9,14 +9,11 @@
   <script type = 'text/javascript'>$(document).ready(function(){my_functions(); wheatherPanel(); <%= js_functions %> myPhotoPage();});</script>
 </head>
 <body>
-	<div id = 'phTop'>
-	</div>
 	<div id = 'phContent'>
 		<%= yield %>
 	</div>
 	<div id = 'bottom' style = 'width: 100%;'>
 		<div id = 'test'></div><br />
-		<p><%= @f.to_s + ' ' + @l.to_s + ' ' + @c.to_s %></p>
 	</div>
 </body>
 </html>
