@@ -732,8 +732,7 @@ function setPhotoSizeByScreen(width, height)
                      goToLink($(".ph-big-next").attr('link_to'));
                }
            }});          
-   if (height > newHeight){$("#bPhoto").height(newHeight);}
-   iconsTop = $("#bPhoto").height()/2 - $("div#iIcon").height()/2;
+   if (height > newHeight){$("#bPhoto").height(newHeight); iconsTop = newHeight/2 - $("div#iIcon").height()/2;}else{iconsTop = height/2 - $("div#iIcon").height()/2;}
    $("div#iIcon").css('top', iconsTop + 'px')   ;
 }
 
