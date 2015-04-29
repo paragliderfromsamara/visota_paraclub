@@ -1,3 +1,6 @@
+require 'xmp'
+require 'exifr'
+require 'open-uri'
 class Photo < ActiveRecord::Base
   attr_accessor :delete_flag
   attr_accessible :article_id, :category_id, :description, :event_id, :link, :message_id, :name, :photo_album_id, :user_id, :theme_id, :status_id, :delete_flag, :visibility_status_id
@@ -51,6 +54,44 @@ class Photo < ActiveRecord::Base
     p[:width] = image.columns
 	p[:height] = image.rows
 	return p
+  end
+  def exif_data_xmp(name)
+    v = ''
+    path = Rails.root.join("public#{self.link}").to_s
+    img = EXIFR::JPEG.new(path)
+    if img.exif?
+      xmp = XMP.parse(img)
+      if xmp != nil
+        xmp.namespaces.each do |namespace_name|
+          namespace = xmp.send(namespace_name)
+          namespace.attributes.each do |attr|
+            if attr == name 
+              v = namespace.send(attr)
+            end
+          end
+        end
+      end
+    end
+    return v
+  end
+  def exif_data
+    path = Rails.root.join("public#{self.link}").to_s
+    exifData = EXIFR::JPEG.new(path)
+    xmp = XMP.parse(exifData)
+    exif = {
+      :make => exifData.make.to_s,
+      :model => exifData.model.to_s,
+      :exposure_time => exifData.exposure_time.to_s,
+      :f_number => "f/#{exifData.f_number.to_i}",
+      :iso => self.exif_data_xmp('ISOSpeed').to_s,
+      :author =>  exifData.artist,
+      :focal_length => "#{exifData.focal_length.to_f}мм",
+      :software => exifData.software,
+      :lens => self.exif_data_xmp('Lens').to_s,
+      :exposure => self.exif_data_xmp('Exposure').to_s
+      
+    }
+    return exif
   end
   def isHorizontal?
 	p = self.widthAndHeight

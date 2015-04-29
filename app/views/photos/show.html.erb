@@ -24,8 +24,30 @@
 				<%= newMessageFormInitial('none', '#new_message').html_safe %>
 				<h3>Комментарии к фото</h3>
 				<br />
-				
-				
+				Марка камеры: <%= @photo.exif_data[:make] %>
+				<br />
+				Модель камеры: <%= @photo.exif_data[:model] %>
+				<br />
+				Выдержка: <%= @photo.exif_data[:exposure_time] %>
+				<br />
+				Диафрагма: <%= @photo.exif_data[:f_number] %>
+				<br />
+				Фокусное расстояние: <%= @photo.exif_data[:focal_length] %>
+				<br />
+				Автор: <%= @photo.exif_data[:author] %>
+				<br />
+				Software: <%= @photo.exif_data[:software] %>
+				<br />
+				Объектив: <%= @photo.exif_data[:lens] %>
+				<br />
+				Экспозиция: <%= @photo.exif_data[:exposure] %>
+				<br />
+				ISOSpeed: <%= @photo.exif_data[:iso] %>
+                <br />
+                <hr />
+                 <br />
+                  <br />
+                
 				<div class = 'central_field' style = 'width: 980px;'>
 				
 					<% if @photo.comments != [] %>
