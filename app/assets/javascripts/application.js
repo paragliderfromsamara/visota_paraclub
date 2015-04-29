@@ -718,6 +718,7 @@ function setPhotoSizeByScreen(width, height)
    var wHeight =  $(window).height();
    var pagHeight = $("#photoPagination").outerHeight(true);
    var newHeight = wHeight-pagHeight;
+   var iconsTop = 200;
    $("#test").text(allowArrows);
    $(document).keyup(
        function(event){
@@ -732,7 +733,8 @@ function setPhotoSizeByScreen(width, height)
                }
            }});          
    if (height > newHeight){$("#bPhoto").height(newHeight);}
-      
+   iconsTop = $("#bPhoto").height()/2 - $("div#iIcon").height()/2;
+   $("div#iIcon").css('top', iconsTop + 'px')   ;
 }
 
 //photo_path end

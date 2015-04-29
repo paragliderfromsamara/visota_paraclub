@@ -1,6 +1,6 @@
 <div id = 'photoField'>
-	<% if @prev_photo != nil %><div class = 'ph-big-links ph-big-prev' link_to = '<%= @prev_photo %>'></div><% end %>
-	<% if @next_photo != nil %><div class = 'ph-big-links ph-big-next' link_to = '<%= @next_photo %>'></div><% end %>
+	<% if @prev_photo != nil %><div class = 'ph-big-links ph-big-prev' link_to = '<%= @prev_photo %>'><div id = 'iIcon'></div></div><% end %>
+	<% if @next_photo != nil %><div class = 'ph-big-links ph-big-next' link_to = '<%= @next_photo %>'><div id = 'iIcon'></div></div><% end %>
 	<div align = 'center' class = 'central_field' style = 'width: 100%;'>
 		<%= image_tag @photo.link, :id => 'bPhoto' %>
 	</div>

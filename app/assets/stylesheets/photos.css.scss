@@ -1,7 +1,14 @@
 // Place all the styles related to the Photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+@mixin my_opacity($t){opacity: $t;filter: alpha(opacity=$t*100);-moz-opacity: $t;}
+@mixin animation($t)
+	{
+	-webkit-transition-duration: $t;
+    -o-transition-duration: $t;
+    -moz-transition-duration: $t;
+    transition-duration: $t;
+	}
 #phTop, #phContent, #photoField,#phInfo {position: relative; width: 100%;}
 #phTop {
 		height: 50px;
@@ -84,16 +91,42 @@
 	{
 		position: absolute;
 		height: 100%;
-		width: 50%;
+		width: 40%;
 		z-index: 9999;
 		cursor: pointer;
+        
 	}
+    .ph-big-links:hover
+    {
+        #iIcon{@include my_opacity(0.8);}
+   
+    }
+    #iIcon 
+    {
+        position:absolute;
+        width:50px;
+        height:45px;
+        background-repeat:no-repeat;
+        @include my_opacity(0.2);
+        @include animation(400);
+    }
 	.ph-big-prev
 	{
 		left: 0;
+        #iIcon 
+        {
+            left:0;
+            background-image:url('/img/prev.png');
+        }
+
 	}
 	.ph-big-next
 	{
 		right:0;
+        #iIcon 
+        {
+            right:0;
+            background-image:url('/img/next.png');
+        }
 	}
 }
